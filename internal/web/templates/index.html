@@ -1,0 +1,170 @@
+{{ define "index.html" }}
+</head>
+<script src="/fs/public/js/heatmap.js"></script>
+<script src="/fs/public/js/index.js"></script>
+<script src="/fs/public/js/weight-chart.js"></script>
+<link rel="stylesheet" type="text/css" href="/fs/public/css/index.css" />
+<body>
+<br>
+<!-- Add Weight Modal -->
+<div class="modal" id="mWeight">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add weight</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/weight/" method="post" name="sets">
+          <table class="table table-borderless">
+            <tr>
+              <td>Date</td>
+              <td><input name="date" type="date" class="form-control" id="weightDate"></td>
+            </tr>
+            <tr>
+              <td>Weight</td>
+              <td><input name="weight" type="number" class="form-control"></td>
+            </tr>
+            <tr>
+              <td>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+<div class="container-lg">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card border-primary">
+        <div class="card-body">
+          <div class="horiz-scroll">
+              <div style="max-height: 100px; width: 1150px;">
+                  <canvas id="matrix-chart" style="height: 100%; width: 100%;"></canvas>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-primary">
+        <div class="card-body" style="overflow-x: scroll;">
+          <div class="d-flex justify-content-evenly">
+            <div class="col-md-8">
+              <div class="chart-container" style="max-width: fit-content">
+                <canvas id="weight-chart" style="max-height: 100px;"></canvas>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <button class="btn del-set-button" title="Add weight" data-bs-toggle="modal" data-bs-target="#mWeight" onclick='setWeightDate()'>
+                <h4><i class="bi bi-window-plus"></i></h4>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <br>
+    <div class="row">
+        <div class="col-md">
+            <div class="accordion">
+                {{ range $gr, $grID := .GroupMap }}
+                <div class="accordion-item border-primary">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $grID }}" aria-expanded="false" aria-controls="{{ $grID }}">
+                        {{ $gr }}
+                      </button>
+                    </h2>
+                    <div id="{{ $grID }}" class="accordion-collapse collapse">
+                      <div class="accordion-body">
+                        {{ range $.ExData.Exs }}
+                        {{ if eq .Group $gr }}
+                        <div class="hstack gap-2">
+                            <a href="/exercise/?id={{ .ID }}"><button class="btn del-set-button" title="Edit">
+                              <i class="bi bi-pencil-square"></i>
+                            </button></a>
+                            <!-- Button trigger modal -->
+                            <button class="btn add-exercise-button" title="Show details" data-bs-toggle="modal" data-bs-target="#modal{{ .ID }}">
+                              <i class="bi bi-window-desktop"></i>
+                            </button>
+<!-- Modal -->
+<div class="modal" id="modal{{ .ID }}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ .Name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col">
+          <p>Description: {{ .Descr }}</p>
+          <p>Weight (default): {{ .Weight }}</p>
+          <p>Reps (default): {{ .Reps }}</p>
+        </div>
+        <div class="col">
+          <img src="{{ .Image }}" style="max-width: 100%;max-height: 100%;" alt="Exercise Image"></img>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+                            <button class="btn exercise-button" onclick='addExercise("{{ .Name }}", "{{ .Weight }}", "{{ .Reps }}")' title="Weight: {{ .Weight }}; Reps: {{ .Reps }};">{{ .Name }}</button>
+                            <button class="btn add-exercise-button" onclick='addExercise("{{ .Name }}", "{{ .Weight }}", "{{ .Reps }}")' title="Add">
+                                <i class="bi bi-arrow-right-square"></i>
+                            </button>
+                        </div>
+                        {{ end }}
+                        {{ end }}
+                      </div>
+                    </div>
+                  </div>
+                {{ end }}              
+              </div>
+        </div>
+        <div class="col-md">
+            <div class="card border-primary">
+                <!-- <div class="card-header">Today</div> -->
+                <div class="card-body">
+                  <div class="gap-3 hstack">
+                    <button onclick='moveDayLeftRight(-1, {{ .ExData.Sets }})' class="btn del-set-button"><i class="bi bi-arrow-left-square"></i></button>
+                    <input type="date" class="m-auto form-control" onchange='setFormDate({{ .ExData.Sets }})' id="realDate" style="width: 40%;">
+                    <button onclick='moveDayLeftRight(+1, {{ .ExData.Sets }})' class="btn del-set-button"><i class="bi bi-arrow-right-square"></i></button>
+                  </div>
+                <form action="/set/" method="post" name="sets">
+                  <input name="date" type="hidden" id="formDate">
+                  <div class="table-responsive">
+                    <table class="table table-borderless">
+                      <thead>
+                          <th class="col-5">Name</th>
+                          <th class="col-3">Weight</th>
+                          <th class="col-3">Reps</th>
+                          <th class="col-1"></th>
+                      </thead>
+                      <tbody id="todayEx"></tbody>
+                    </table>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+  setFormDate({{ .ExData.Sets }});
+  generateWeightChart({{ .ExData.Weight }}, {{ .Config.HeatColor }}, -7);
+  makeChart({{ .HeatMap }}, {{ .Config.HeatColor }}, {{ .ExData.Sets }});
+</script>
+{{ template "footer.html" }}
+{{ end }}
