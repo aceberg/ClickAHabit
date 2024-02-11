@@ -9,6 +9,12 @@ import (
 var (
 	// appConfig - config for Web Gui
 	appConfig models.Conf
+
+	// plans - checks from plan.yaml
+	plans []models.Plan
+
+	// checks - checks from DB
+	checks []models.Check
 )
 
 // templFS - html templates

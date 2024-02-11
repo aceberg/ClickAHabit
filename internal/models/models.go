@@ -13,9 +13,34 @@ type Conf struct {
 	NodePath string
 }
 
+// Item - element of Plan
+type Item struct {
+	Name  string
+	Color string
+	Count int
+}
+
+// Plan - check from plan.yaml
+type Plan struct {
+	Group string
+	Items []Item
+}
+
+// Check - check for DB
+type Check struct {
+	ID    int    `db:"ID"`
+	Date  string `db:"DATE"`
+	Name  string `db:"NAME"`
+	Group string `db:"GR"`
+	Color string `db:"COLOR"`
+	Count int    `db:"COUNT"`
+}
+
 // GuiData - web gui data
 type GuiData struct {
 	Config  Conf
 	Themes  []string
 	Version string
+	Plans   []Plan
+	Checks  []Check
 }
