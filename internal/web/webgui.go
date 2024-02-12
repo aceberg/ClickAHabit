@@ -27,7 +27,6 @@ func Gui(dirPath, nodePath string) {
 	check.Path(appConfig.DBPath)
 	appConfig.ConfPath = confPath
 	appConfig.NodePath = nodePath
-	appConfig.Icon = icon
 
 	log.Println("INFO: starting web gui with config", appConfig.ConfPath)
 
@@ -51,9 +50,11 @@ func Gui(dirPath, nodePath string) {
 	router.StaticFS("/fs/", http.FS(pubFS)) // public
 
 	router.GET("/", indexHandler)         // index.go
+	router.GET("/add/:id", addHandler)    // add.go
 	router.GET("/config/", configHandler) // config.go
+	router.GET("/histdel/:id", histDel)   // history.go
+	router.GET("/history/", histHandler)  // history.go
 
-	router.GET("/add/:id", addHandler)         // add.go
 	router.POST("/config/", saveConfigHandler) // config.go
 
 	err := router.Run(address)

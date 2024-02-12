@@ -36,7 +36,7 @@ func Select(path string) (checks []models.Check) {
 
 	mu.Lock()
 	dbx := connect(path)
-	err := dbx.Select(&checks, "SELECT * FROM checks ORDER BY ID ASC")
+	err := dbx.Select(&checks, "SELECT * FROM checks ORDER BY ID DESC")
 	mu.Unlock()
 
 	check.IfError(err)

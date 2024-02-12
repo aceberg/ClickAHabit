@@ -1,7 +1,6 @@
 package web
 
 import (
-	"log"
 	"net/http"
 	"strconv"
 
@@ -14,7 +13,6 @@ func addHandler(c *gin.Context) {
 	var idStr string
 
 	ID := c.Param("id")
-	log.Println("ID =", ID)
 
 	for _, check := range allChecks {
 		idStr = strconv.Itoa(check.ID)

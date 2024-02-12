@@ -1,8 +1,8 @@
 package web
 
 import (
-	"log"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 
@@ -16,9 +16,6 @@ func indexHandler(c *gin.Context) {
 	guiData.Config = appConfig
 	allChecks = db.Select(appConfig.DBPath)
 
-	log.Println("FLATPLANS =", flatPlans)
-	log.Println("GROUPLIST =", groupList)
-
 	guiData.Themes = groupList
 	guiData.Checks = setTodayChecks()
 
@@ -28,7 +25,7 @@ func indexHandler(c *gin.Context) {
 
 func setTodayChecks() (todayChecks []models.Check) {
 	var changedDB bool
-	date := "2024-02-12"
+	date := time.Now().Format("2006-01-02")
 
 	todayChecks = selectChecksByDate(date)
 

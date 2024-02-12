@@ -1,0 +1,34 @@
+{{ define "history.html" }}
+
+<body>
+    <div class="container-lg mt-3 table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <th>Date</th>
+                <th>Group</th>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Count</th>
+                <th>Del</th>
+            </thead>
+            <tbody>
+                {{ range .Checks }}
+                <tr>
+                    <td>{{ .Date }}</td>
+                    <td>{{ .Group }}</td>
+                    <td>{{ .Name }}</td>
+                    <td>
+                        <i class="bi bi-circle-fill" style="color: {{ .Color }};"></i>
+                    </td>
+                    <td>{{ .Count }}</td>
+                    <td>
+                        <a href="/histdel/{{ .ID }}"><i class="bi bi-x-circle"></i></a>
+                    </td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+
+{{ template "footer.html" }}
+{{ end }}

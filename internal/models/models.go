@@ -6,7 +6,6 @@ type Conf struct {
 	Port     string
 	Theme    string
 	Color    string
-	Icon     string
 	DBPath   string
 	DirPath  string
 	ConfPath string
