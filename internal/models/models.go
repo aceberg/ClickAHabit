@@ -15,15 +15,14 @@ type Conf struct {
 
 // Item - element of Plan
 type Item struct {
-	Name  string
-	Color string
-	Count int
+	Name  string `yaml:"name"`
+	Color string `yaml:"color"`
 }
 
 // Plan - check from plan.yaml
 type Plan struct {
-	Group string
-	Items []Item
+	Group string `yaml:"group"`
+	Items []Item `yaml:"items"`
 }
 
 // Check - check for DB
@@ -41,6 +40,5 @@ type GuiData struct {
 	Config  Conf
 	Themes  []string
 	Version string
-	Plans   []Plan
 	Checks  []Check
 }

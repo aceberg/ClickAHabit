@@ -9,11 +9,14 @@
 <div class="container-lg">
   <br>
   <div class="row">
-    {{ range .Plans }}
-    <h5>{{ .Group }}</h5>
-      {{ range .Items }}
+    {{ range .Themes }}
+    {{ $group:= . }}
+    <h5>{{ $group }}</h5>
+      {{ range $.Checks }}
+      {{ if eq .Group $group }}
       <div class="col-md-auto">
       <p>
+        <a href="/add/{{ .ID }}">
         {{ if .Count }}
         <button class="btn btn-lg btn-primary my-btn-lg" style="background-color: {{ .Color }};">
           {{ .Name }}
@@ -25,8 +28,10 @@
         </button>
         <button class="btn btn-lg btn-outline-primary">{{ .Count }}</button>
         {{ end }}
+        </a>
       </p>
       </div>
+      {{ end }}
       {{ end }}
     {{ end }}
   </div>

@@ -1,12 +1,12 @@
 package web
 
 import (
+	"log"
 	"net/http"
-	"time"
 
 	"github.com/gin-gonic/gin"
 
-	// "github.com/aceberg/CheckList/internal/db"
+	"github.com/aceberg/CheckList/internal/db"
 	"github.com/aceberg/CheckList/internal/models"
 )
 
@@ -14,57 +14,57 @@ func indexHandler(c *gin.Context) {
 	var guiData models.GuiData
 
 	guiData.Config = appConfig
+	allChecks = db.Select(appConfig.DBPath)
 
-	generatePlan()
-	guiData.Plans = plans
-	guiData.Checks = checks
+	log.Println("FLATPLANS =", flatPlans)
+	log.Println("GROUPLIST =", groupList)
+
+	guiData.Themes = groupList
+	guiData.Checks = setTodayChecks()
 
 	c.HTML(http.StatusOK, "header.html", guiData)
 	c.HTML(http.StatusOK, "index.html", guiData)
 }
 
-func generatePlan() {
-	var plan models.Plan
-	var item models.Item
+func setTodayChecks() (todayChecks []models.Check) {
+	var changedDB bool
+	date := "2024-02-12"
 
-	plans = []models.Plan{}
+	todayChecks = selectChecksByDate(date)
 
-	plan.Group = "Home"
+	for _, plan := range flatPlans {
+		if !inSlice(plan, todayChecks) {
+			plan.Date = date
+			todayChecks = append(todayChecks, plan)
+			db.Insert(appConfig.DBPath, plan)
+			changedDB = true
+		}
+	}
 
-	item.Name = "Check 1"
-	item.Color = ""
-	item.Count = 1
-	plan.Items = append(plan.Items, item)
+	if changedDB {
+		allChecks = db.Select(appConfig.DBPath)
+		todayChecks = selectChecksByDate(date)
+	}
 
-	item.Name = "Check 2"
-	item.Color = "#7C68E9"
-	plan.Items = append(plan.Items, item)
+	return todayChecks
+}
 
-	item.Name = "Long Check 3"
-	item.Color = "#59BF40"
-	plan.Items = append(plan.Items, item)
+func selectChecksByDate(date string) (returnChecks []models.Check) {
+	for _, check := range allChecks {
+		if check.Date == date {
+			returnChecks = append(returnChecks, check)
+		}
+	}
+	return returnChecks
+}
 
-	plans = append(plans, plan)
-	plan.Group = "Test"
+func inSlice(plan models.Check, todayChecks []models.Check) bool {
 
-	item.Name = "Check 2"
-	item.Color = "#7C68E9"
-	item.Count = 3
-	plan.Items = append(plan.Items, item)
+	for _, check := range todayChecks {
+		if (plan.Group == check.Group) && (plan.Name == check.Name) {
+			return true
+		}
+	}
 
-	item.Count = 0
-
-	item.Name = "Check 2"
-	item.Color = "#7C68E9"
-	plan.Items = append(plan.Items, item)
-
-	item.Name = "Check 2"
-	item.Color = "#7C68E9"
-	plan.Items = append(plan.Items, item)
-
-	item.Name = "Check 2"
-	item.Color = "#7C68E9"
-	plan.Items = append(plan.Items, item)
-
-	plans = append(plans, plan)
+	return false
 }
