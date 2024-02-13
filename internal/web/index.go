@@ -17,7 +17,9 @@ func indexHandler(c *gin.Context) {
 	allChecks = db.Select(appConfig.DBPath)
 
 	guiData.Themes = groupList
-	guiData.Checks = setTodayChecks()
+	// guiData.Checks = setTodayChecks()
+	setTodayChecks()
+	guiData.Checks = allChecks
 
 	c.HTML(http.StatusOK, "header.html", guiData)
 	c.HTML(http.StatusOK, "index.html", guiData)
