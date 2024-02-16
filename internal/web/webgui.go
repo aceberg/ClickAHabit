@@ -10,7 +10,6 @@ import (
 	"github.com/aceberg/CheckList/internal/check"
 	"github.com/aceberg/CheckList/internal/conf"
 	"github.com/aceberg/CheckList/internal/db"
-	"github.com/aceberg/CheckList/internal/models"
 	"github.com/aceberg/CheckList/internal/yaml"
 )
 
@@ -33,7 +32,6 @@ func Gui(dirPath, nodePath string) {
 	db.Create(appConfig.DBPath)
 	allChecks = db.Select(appConfig.DBPath)
 	allPlans = yaml.Read(dirPath + "/plan.yaml")
-	plansToSlice() // webgui.go
 
 	address := appConfig.Host + ":" + appConfig.Port
 
@@ -49,35 +47,15 @@ func Gui(dirPath, nodePath string) {
 
 	router.StaticFS("/fs/", http.FS(pubFS)) // public
 
-	router.GET("/", indexHandler)         // index.go
-	router.GET("/add/:id", addHandler)    // add.go
-	router.GET("/config/", configHandler) // config.go
-	router.GET("/histdel/:id", histDel)   // history.go
-	router.GET("/history/", histHandler)  // history.go
+	router.GET("/", indexHandler)          // index.go
+	router.GET("/add/:id", addHandler)     // add.go
+	router.GET("/config/", configHandler)  // config.go
+	router.GET("/date/:date", dateHandler) // date.go
+	router.GET("/histdel/:id", histDel)    // history.go
+	router.GET("/history/", histHandler)   // history.go
 
 	router.POST("/config/", saveConfigHandler) // config.go
 
 	err := router.Run(address)
 	check.IfError(err)
-}
-
-func plansToSlice() {
-	var oneFlatPlan models.Check
-
-	groupList = []string{}
-	flatPlans = []models.Check{}
-
-	for _, plan := range allPlans {
-		groupList = append(groupList, plan.Group)
-
-		for _, item := range plan.Items {
-			oneFlatPlan = models.Check{}
-
-			oneFlatPlan.Group = plan.Group
-			oneFlatPlan.Name = item.Name
-			oneFlatPlan.Color = item.Color
-
-			flatPlans = append(flatPlans, oneFlatPlan)
-		}
-	}
 }

@@ -15,6 +15,8 @@ func Create(path string) {
 		"NAME"		TEXT,
 		"GR"		TEXT,
 		"COLOR"		TEXT,
+		"ICON"		TEXT,
+		"PLACE"		INTEGER,
 		"COUNT"		INTEGER
 	);`
 	exec(path, sqlStatement)
@@ -23,13 +25,13 @@ func Create(path string) {
 // Insert - insert into DB
 func Insert(path string, check models.Check) {
 
-	sqlStatement := `INSERT INTO checks (DATE, NAME, GR, COLOR, COUNT)
-	VALUES ('%s','%s','%s','%s','%d');`
+	sqlStatement := `INSERT INTO checks (DATE, NAME, GR, COLOR, ICON, PLACE, COUNT)
+	VALUES ('%s','%s','%s','%s','%s','%d','%d');`
 
 	check.Group = quoteStr(check.Group)
 	check.Name = quoteStr(check.Name)
 
-	sqlStatement = fmt.Sprintf(sqlStatement, check.Date, check.Name, check.Group, check.Color, check.Count)
+	sqlStatement = fmt.Sprintf(sqlStatement, check.Date, check.Name, check.Group, check.Color, check.Icon, check.Place, check.Count)
 
 	exec(path, sqlStatement)
 }
@@ -37,12 +39,12 @@ func Insert(path string, check models.Check) {
 // Update - update DB
 func Update(path string, check models.Check, id int) {
 
-	sqlStatement := `UPDATE checks SET DATE='%s', NAME='%s', GR='%s', COLOR='%s', COUNT='%d' WHERE ID='%d';`
+	sqlStatement := `UPDATE checks SET DATE='%s', NAME='%s', GR='%s', COLOR='%s', ICON='%s', PLACE='%d', COUNT='%d' WHERE ID='%d';`
 
 	check.Group = quoteStr(check.Group)
 	check.Name = quoteStr(check.Name)
 
-	sqlStatement = fmt.Sprintf(sqlStatement, check.Date, check.Name, check.Group, check.Color, check.Count, id)
+	sqlStatement = fmt.Sprintf(sqlStatement, check.Date, check.Name, check.Group, check.Color, check.Icon, check.Place, check.Count, id)
 
 	exec(path, sqlStatement)
 }

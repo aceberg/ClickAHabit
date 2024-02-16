@@ -12,16 +12,13 @@ type Conf struct {
 	NodePath string
 }
 
-// Item - element of Plan
-type Item struct {
-	Name  string `yaml:"name"`
-	Color string `yaml:"color"`
-}
-
 // Plan - check from plan.yaml
 type Plan struct {
 	Group string `yaml:"group"`
-	Items []Item `yaml:"items"`
+	Name  string `yaml:"name"`
+	Color string `yaml:"color"`
+	Icon  string `yaml:"icon"`
+	Place int    `yaml:"place"`
 }
 
 // Check - check for DB
@@ -31,6 +28,8 @@ type Check struct {
 	Name  string `db:"NAME"`
 	Group string `db:"GR"`
 	Color string `db:"COLOR"`
+	Icon  string `db:"ICON"`
+	Place int    `db:"PLACE"`
 	Count int    `db:"COUNT"`
 }
 

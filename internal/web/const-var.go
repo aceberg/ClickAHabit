@@ -13,12 +13,6 @@ var (
 	// allPlans - checks from plan.yaml
 	allPlans []models.Plan
 
-	// flatPlans - allPlans in one slice
-	flatPlans []models.Check
-
-	// groupList - list of groups from plan
-	groupList []string
-
 	// allChecks - checks from DB
 	allChecks []models.Check
 )
