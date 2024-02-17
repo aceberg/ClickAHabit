@@ -1,49 +1,89 @@
+var curDate = '';
+
+setToday();
 
 function setToday() {
     let today = new Date().toJSON().slice(0, 10);
-    return today;
+    createView(today);
 }
 
-function createView(checks, groups) {
-    let date = setToday();
+function getGroupMap(checks) {
+    const groupMap = new Map();
+    let tmpChecks = [];
 
     let len = checks.length;
-    let dateChecks = [];
-    for (let i = 0 ; i < len; i++) {
-        if (checks[i].Date == date) {
-            console.log(checks[i].Group, checks[i].Name)
-            dateChecks.push(checks[i]);
-        }
-    }
-    console.log(dateChecks);
 
-    len = groups.length;
-    let len1 = dateChecks.length;
-    let grChecks = [];
-    for (i = 0 ; i < len; i++) {
-        for (let j = 0 ; j < len1; j++) {
-            if (groups[i] == dateChecks[j].Group) {
-                console.log("GR:"+groups[i]+"NAME:"+dateChecks[j].Name);
-                grChecks.push(dateChecks[j]);
-            }
+    for (let i = 0 ; i < len; i++) {
+        if (groupMap.has(checks[i].Group)) {
+            tmpChecks = groupMap.get(checks[i].Group);
+        } else {
+            tmpChecks = [];
         }
-        genHTML(groups[i], grChecks);
-        grChecks = [];
+        tmpChecks.push(checks[i]);
+        groupMap.set(checks[i].Group, tmpChecks);
     }
+    return groupMap
+}
+
+async function createView(date) {
+    curDate = date;
+
+    if (document.getElementById('checkList')) {
+        document.getElementById('checkList').innerHTML = '';
+    }
+
+    let groupMap = new Map();
+    let checks = [];
+    let url = '/date/'+date;
+
+    checks = await (await fetch(url)).json();
+    groupMap = getGroupMap(checks);
+
+    groupMap.forEach (function(value, key) {
+        genHTML(key, value);
+    })
 }
 
 function genHTML(gr, checks) {
-
-    let html = '<h5>'+gr+'</h5>';
+    let btn = '';
+    let html = `<p>
+                <h5>${gr}</h5>`;
     let len = checks.length;
     for (let i = 0 ; i < len; i++) {
-        html = html+'<div class="col-md-auto"><a href="/add/'+checks[i].ID+'">';
+        btn = `btn btn-lg`;
         if (checks[i].Count) {
-            html = html+'<button class="btn btn-lg my-btn-lg" style="background-color: '+checks[i].Color+';">'+checks[i].Name+'</button><button class="btn btn-lg" style="background-color: '+checks[i].Color+';">'+checks[i].Count+'</button></div></a>';
+            btn = btn + ` btn-primary"`;
         } else {
-            html = html+'<button class="btn btn-lg btn-outline-primary my-btn-lg">'+checks[i].Name+'</button><button class="btn btn-lg btn-outline-primary">'+checks[i].Count+'</button></div></a>';
+            btn = btn + ` btn-outline-primary"`;
         }
+        html = html + `
+        <div class="col-md-auto">
+            <a href="#" onclick="addOne(${checks[i].ID})">
+                <button id="btn${checks[i].ID}" class="my-btn-lg ${btn}>
+                    <i class="bi bi-circle-fill" style="color: ${checks[i].Color};"></i>&nbsp;${checks[i].Name}
+                </button>
+                <button id="count${checks[i].ID}" class="${btn}>
+                    ${checks[i].Count}
+                </button>
+            </a>
+        </div>`;
     }
+    html = html + `</p>`;
 
     document.getElementById('checkList').insertAdjacentHTML('beforeend', html);
+}
+
+async function addOne(id) {
+    let resp = '';
+    let url = '/add/'+id;
+    resp = await (await fetch(url)).json();
+
+    document.getElementById('count'+id).innerHTML = resp;
+
+    if (resp == 1) {
+        document.getElementById('btn'+id).classList.remove('btn-outline-primary');
+        document.getElementById('count'+id).classList.remove('btn-outline-primary');
+        document.getElementById('btn'+id).classList.add('btn-primary');
+        document.getElementById('count'+id).classList.add('btn-primary');
+    }
 }

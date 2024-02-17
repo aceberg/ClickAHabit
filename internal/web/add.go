@@ -11,16 +11,20 @@ import (
 
 func addHandler(c *gin.Context) {
 	var idStr string
+	var resp int
 
 	ID := c.Param("id")
+	allChecks = db.Select(appConfig.DBPath)
 
 	for _, check := range allChecks {
 		idStr = strconv.Itoa(check.ID)
 		if ID == idStr {
 			check.Count = check.Count + 1
+			resp = check.Count
 			db.Update(appConfig.DBPath, check, check.ID)
+			break
 		}
 	}
 
-	c.Redirect(http.StatusFound, "/")
+	c.IndentedJSON(http.StatusOK, resp)
 }

@@ -1,8 +1,8 @@
 package web
 
 import (
-	"log"
-	// "net/http"
+	// "log"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	// "github.com/aceberg/CheckList/internal/models"
@@ -14,6 +14,7 @@ func dateHandler(c *gin.Context) {
 
 	checks := selectChecksByDate(date)
 
-	log.Println("DATE =", date)
-	log.Println("CHECKS =", checks)
+	// log.Println("CHECKS =", checks)
+
+	c.IndentedJSON(http.StatusOK, checks)
 }
