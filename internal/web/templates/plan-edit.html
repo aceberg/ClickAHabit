@@ -1,0 +1,52 @@
+{{ define "plan-edit.html" }}
+
+<body>
+    <div class="container-lg">
+        <br>
+    <div class="row">
+        <div class="col-md">
+        <div class="card border-primary">
+        <div class="card-body table-responsive">
+        <table class="table table-borderless">
+            <form action="/planedit/" method="post">
+                <input name="id" type="hidden" class="form-control" value="{{ .OnePlan.ID }}">
+                <tr>
+                    <td>Group</td>
+                    <td><input name="group" type="text" class="form-control" value="{{ .OnePlan.Group }}"></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td><input name="name" type="text" class="form-control" value="{{ .OnePlan.Name }}"></td>
+                </tr>
+                <tr>
+                    <td>Color</td>
+                    <td>
+                        <input name="color" value="{{ .OnePlan.Color }}" type="color" class="form-control form-control-color">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Icon</td>
+                    <td><input name="icon" type="text" class="form-control" value="{{ .OnePlan.Icon }}"></td>
+                </tr>
+                <tr>
+                    <td>Place</td>
+                    <td><input name="place" type="number" class="form-control" value="{{ .OnePlan.Place }}"></td>
+                </tr>
+                <tr>
+                    <td><button type="submit" class="btn btn-primary">Save</button></td>
+                    <td></td>
+                </tr>
+            </form>
+        </table>
+        </div>
+        </div>
+        </div>
+        <div class="col-md">
+            
+        </div>
+    </div>
+    </div>
+        
+
+{{ template "footer.html" }}
+{{ end }}
