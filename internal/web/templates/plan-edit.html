@@ -25,6 +25,15 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>No Color</td>
+                    <td>{{ if .OnePlan.NoColor }}
+                        <input name="nocolor" value="yes" class="form-check-input" type="checkbox" checked>
+                        {{ else }}
+                        <input name="nocolor" value="yes" class="form-check-input" type="checkbox">
+                        {{ end }}
+                    </td>
+                </tr>
+                <tr>
                     <td>Icon</td>
                     <td><input name="icon" type="text" class="form-control" value="{{ .OnePlan.Icon }}"></td>
                 </tr>

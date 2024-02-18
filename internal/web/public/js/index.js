@@ -1,9 +1,7 @@
-var curDate = '';
-
-setToday();
 
 function setToday() {
-    let today = new Date().toJSON().slice(0, 10);
+    let today = new Date().toLocaleDateString('en-CA');
+    
     createView(today);
 }
 
@@ -26,28 +24,26 @@ function getGroupMap(checks) {
 }
 
 async function createView(date) {
-    curDate = date;
-
-    if (document.getElementById('checkList')) {
-        document.getElementById('checkList').innerHTML = '';
-    }
+    document.getElementById('realDate').value = date;
+    document.getElementById('checkList').innerHTML = '';
 
     let groupMap = new Map();
     let checks = [];
     let url = '/date/'+date;
 
     checks = await (await fetch(url)).json();
-    groupMap = getGroupMap(checks);
+    if (checks) {
+        groupMap = getGroupMap(checks);
 
-    groupMap.forEach (function(value, key) {
-        genHTML(key, value);
-    })
+        groupMap.forEach (function(value, key) {
+            genHTML(key, value);
+        })
+    }
 }
 
 function genHTML(gr, checks) {
     let btn = '';
-    let html = `<p>
-                <h5>${gr}</h5>`;
+    let html = `<h5>${gr}</h5>`;
     let len = checks.length;
     for (let i = 0 ; i < len; i++) {
         btn = `btn btn-lg`;
@@ -58,17 +54,19 @@ function genHTML(gr, checks) {
         }
         html = html + `
         <div class="col-md-auto">
-            <a href="#" onclick="addOne(${checks[i].ID})">
-                <button id="btn${checks[i].ID}" class="my-btn-lg ${btn}>
-                    <i class="bi bi-circle-fill" style="color: ${checks[i].Color};"></i>&nbsp;${checks[i].Name}
-                </button>
-                <button id="count${checks[i].ID}" class="${btn}>
-                    ${checks[i].Count}
-                </button>
-            </a>
+            <a href="#" onclick="addOne(${checks[i].ID})"><p>
+                <div class="btn-group btn-group-lg">
+                    <button id="btn${checks[i].ID}" class="my-btn-lg ${btn} style="border-left-width: thick; border-left-color: ${checks[i].Color};">
+                        <img src="${checks[i].Icon}" style="height:1.3em;"/>&nbsp;
+                        ${checks[i].Name}
+                    </button>
+                    <button id="count${checks[i].ID}" class="${btn}>
+                        ${checks[i].Count}
+                    </button>
+                </div>
+            </p></a>
         </div>`;
     }
-    html = html + `</p>`;
 
     document.getElementById('checkList').insertAdjacentHTML('beforeend', html);
 }
@@ -85,5 +83,23 @@ async function addOne(id) {
         document.getElementById('count'+id).classList.remove('btn-outline-primary');
         document.getElementById('btn'+id).classList.add('btn-primary');
         document.getElementById('count'+id).classList.add('btn-primary');
+    }
+}
+
+function setFormDate(where) {
+    dateStr = document.getElementById('realDate').value;
+
+    if (where) {
+        let year  = dateStr.substring(0,4);
+        let month = dateStr.substring(5,7);
+        let day   = dateStr.substring(8,10);
+        var date  = new Date(year, month-1, day);
+
+        date.setDate(date.getDate() + parseInt(where));
+        let left = date.toLocaleDateString('en-CA');
+
+        createView(left);
+    } else {
+        createView(dateStr);
     }
 }

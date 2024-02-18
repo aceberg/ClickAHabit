@@ -1,4 +1,14 @@
 
 .my-btn-lg {
-    width: 10em;
+    width: 9em;
+}
+
+.tr-button {
+    height: 100%;
+    background-color: #00000000;
+    color: var(--bs-primary);
+    text-align: center;
+}
+.tr-button:hover {
+    background-color: #0000001a;
 }

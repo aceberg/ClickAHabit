@@ -1,7 +1,7 @@
 package web
 
 import (
-	// "log"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -43,11 +43,17 @@ func savePlanHandler(c *gin.Context) {
 	plan.Color = c.PostForm("color")
 	plan.Icon = c.PostForm("icon")
 	place := c.PostForm("place")
+	nocolor := c.PostForm("nocolor")
+
+	if nocolor == "yes" {
+		plan.NoColor = true
+		plan.Color = ""
+	}
 
 	plan.ID, _ = strconv.Atoi(id)
 	plan.Place, _ = strconv.Atoi(place)
 
-	// log.Println("PLAN TO SAVE:", plan)
+	log.Println("NOCOL:", nocolor)
 
 	if plan.ID > 0 {
 		deletePlan(plan.ID)

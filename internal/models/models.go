@@ -14,12 +14,13 @@ type Conf struct {
 
 // Plan - check from plan.yaml
 type Plan struct {
-	ID    int    `yaml:"-"`
-	Group string `yaml:"group"`
-	Name  string `yaml:"name"`
-	Color string `yaml:"color"`
-	Icon  string `yaml:"icon,omitempty"`
-	Place int    `yaml:"place,omitempty"`
+	ID      int    `yaml:"-"`
+	Group   string `yaml:"group"`
+	Name    string `yaml:"name"`
+	Color   string `yaml:"color,omitempty"`
+	NoColor bool   `yaml:"nocolor,omitempty"`
+	Icon    string `yaml:"icon,omitempty"`
+	Place   int    `yaml:"place,omitempty"`
 }
 
 // Check - check for DB

@@ -4,13 +4,14 @@
     <div class="container-lg mt-3 table-responsive">
         <table class="table table-striped">
             <thead>
-                <th></th>
+                <th style="max-width: 1%;">Edit</th>
                 <th>Icon</th>
+                <th>Color</th>
+                <th>NoColor</th>
                 <th>Group</th>
                 <th>Name</th>
-                <th>Color</th>
                 <th>Place</th>
-                <th>Del</th>
+                <th style="max-width: 1%;">Del</th>
             </thead>
             <tbody>
                 {{ range .Plans }}
@@ -20,16 +21,20 @@
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
-                    <td>{{ .Icon }}</td>
+                    <td><img src="{{ .Icon }}" style="height:1.3em;"/></td>
+                    <td>
+                        <i class="bi bi-square-fill" style="color: {{ .Color }};"></i>
+                    </td>
+                    <td>{{ if .NoColor }}
+                        <i class="bi bi-check-square"></i>
+                        {{ end }}
+                    </td>
                     <td>{{ .Group }}</td>
                     <td>{{ .Name }}</td>
-                    <td>
-                        <i class="bi bi-circle-fill" style="color: {{ .Color }};"></i>
-                    </td>
                     <td>{{ .Place }}</td>
                     <td>
                         <a href="/plandel/{{ .ID }}">
-                            <i class="bi bi-x-circle"></i>
+                            <i class="bi bi-x-square"></i>
                         </a>
                     </td>
                 </tr>
