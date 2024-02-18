@@ -103,3 +103,15 @@ function setFormDate(where) {
         createView(dateStr);
     }
 }
+
+async function updatePlan() {
+    date = document.getElementById('realDate').value;
+
+    let resp = '';
+    let url = '/update/'+date;
+    resp = await (await fetch(url)).json();
+
+    console.log("UPDATE:", resp);
+
+    createView(date);
+}

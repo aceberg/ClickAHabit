@@ -56,6 +56,7 @@ func Gui(dirPath, nodePath string) {
 	router.GET("/plan/", planHandler)        // plan.go
 	router.GET("/planedit/:id", editHandler) // plan-edit.go
 	router.GET("/plandel/:id", planDel)      // plan.go
+	router.GET("/update/:date", updatePlan)  // update.go
 
 	router.POST("/config/", saveConfigHandler) // config.go
 	router.POST("/planedit/", savePlanHandler) // plan-edit.go
