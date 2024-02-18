@@ -1,7 +1,7 @@
 package web
 
 import (
-	"log"
+	// "log"
 	"net/http"
 
 	// "github.com/aceberg/CheckList/internal/db"
@@ -12,8 +12,9 @@ func updatePlan(c *gin.Context) {
 	var resp int
 
 	date := c.Param("date")
+	setChecksForDate(date) // today.go
 
-	log.Println("UPD DATE:", date)
+	// log.Println("UPD DATE:", date)
 
 	c.IndentedJSON(http.StatusOK, resp)
 }

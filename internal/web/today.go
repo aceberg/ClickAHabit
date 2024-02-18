@@ -7,10 +7,16 @@ import (
 	"github.com/aceberg/CheckList/internal/models"
 )
 
-func setTodayChecks() (todayChecks []models.Check) {
+func setTodayChecks() {
+
+	date := time.Now().Format("2006-01-02")
+	lastToday = date
+	setChecksForDate(date)
+}
+
+func setChecksForDate(date string) (todayChecks []models.Check) {
 	var changedDB bool
 	var check models.Check
-	date := time.Now().Format("2006-01-02")
 
 	todayChecks = selectChecksByDate(date)
 

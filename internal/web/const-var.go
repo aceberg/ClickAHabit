@@ -15,6 +15,9 @@ var (
 
 	// allChecks - checks from DB
 	allChecks []models.Check
+
+	// lastToday - last date for which checks were set
+	lastToday string
 )
 
 // templFS - html templates

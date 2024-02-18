@@ -111,7 +111,5 @@ async function updatePlan() {
     let url = '/update/'+date;
     resp = await (await fetch(url)).json();
 
-    console.log("UPDATE:", resp);
-
     createView(date);
 }

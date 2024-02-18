@@ -10,6 +10,7 @@ type Conf struct {
 	DirPath  string
 	ConfPath string
 	NodePath string
+	BtnWidth string
 }
 
 // Plan - check from plan.yaml

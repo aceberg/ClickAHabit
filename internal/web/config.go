@@ -33,6 +33,7 @@ func saveConfigHandler(c *gin.Context) {
 	appConfig.Port = c.PostForm("port")
 	appConfig.Theme = c.PostForm("theme")
 	appConfig.Color = c.PostForm("color")
+	appConfig.BtnWidth = c.PostForm("btnwidth")
 
 	conf.Write(appConfig)
 
