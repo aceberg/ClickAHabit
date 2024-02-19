@@ -8,8 +8,8 @@ import (
 	// Import module for SQLite DB
 	_ "modernc.org/sqlite"
 
-	"github.com/aceberg/CheckList/internal/check"
-	"github.com/aceberg/CheckList/internal/models"
+	"github.com/aceberg/ClickAHabit/internal/check"
+	"github.com/aceberg/ClickAHabit/internal/models"
 )
 
 var mu sync.Mutex

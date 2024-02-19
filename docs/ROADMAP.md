@@ -19,8 +19,8 @@
 ## MAYBE
 
 - [ ] Add exercise group with 1 button
-- [ ] Sets [#1](https://github.com/aceberg/CheckList/issues/1)
-- [ ] Weight field take decimals [#4](https://github.com/aceberg/CheckList/issues/4)
+- [ ] Sets [#1](https://github.com/aceberg/ClickAHabit/issues/1)
+- [ ] Weight field take decimals [#4](https://github.com/aceberg/ClickAHabit/issues/4)
 - [ ] Multiple users
 
 ## NOT DOING

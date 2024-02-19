@@ -6,8 +6,8 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/aceberg/CheckList/internal/check"
-	"github.com/aceberg/CheckList/internal/models"
+	"github.com/aceberg/ClickAHabit/internal/check"
+	"github.com/aceberg/ClickAHabit/internal/models"
 )
 
 // Read - read .yaml file to struct

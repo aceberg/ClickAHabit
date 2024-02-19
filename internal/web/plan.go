@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/aceberg/CheckList/internal/models"
-	"github.com/aceberg/CheckList/internal/yaml"
+	"github.com/aceberg/ClickAHabit/internal/models"
+	"github.com/aceberg/ClickAHabit/internal/yaml"
 )
 
 func planHandler(c *gin.Context) {

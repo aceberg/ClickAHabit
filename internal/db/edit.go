@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 
-	"github.com/aceberg/CheckList/internal/models"
+	"github.com/aceberg/ClickAHabit/internal/models"
 )
 
 // Create - create table if not exists

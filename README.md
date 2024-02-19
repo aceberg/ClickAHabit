@@ -1,11 +1,11 @@
 [![Main-Docker](https://github.com/aceberg/exercisediary/actions/workflows/main-docker.yml/badge.svg)](https://github.com/aceberg/exercisediary/actions/workflows/main-docker.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/aceberg/exercisediary)](https://goreportcard.com/report/github.com/aceberg/exercisediary)
-[![Maintainability](https://api.codeclimate.com/v1/badges/e8f67994120fc7936aeb/maintainability)](https://codeclimate.com/github/aceberg/CheckList/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e8f67994120fc7936aeb/maintainability)](https://codeclimate.com/github/aceberg/ClickAHabit/maintainability)
 ![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/aceberg/exercisediary)
 
 <h1><a href="https://github.com/aceberg/exercisediary">
     <img src="https://raw.githubusercontent.com/aceberg/exercisediary/main/assets/logo.png" width="35" />
-</a>Exercise Diary</h1>
+</a>Click A Habit</h1>
 
 Workout diary with GitHub-style year visualization
 
@@ -13,18 +13,18 @@ Workout diary with GitHub-style year visualization
 - [Config](https://github.com/aceberg/exercisediary#config)
 - [Options](https://github.com/aceberg/exercisediary#options)
 - [Local network only](https://github.com/aceberg/exercisediary#local-network-only)
-- [Roadmap](https://github.com/aceberg/CheckList/blob/main/docs/ROADMAP.md)
+- [Roadmap](https://github.com/aceberg/ClickAHabit/blob/main/docs/ROADMAP.md)
 - [Thanks](https://github.com/aceberg/exercisediary#thanks)
 
 
-![Screenshot](https://raw.githubusercontent.com/aceberg/CheckList/main/assets/Screenshot%202023-12-25%20at%2023-19-08%20Exercise%20Diary.png)
+![Screenshot](https://raw.githubusercontent.com/aceberg/ClickAHabit/main/assets/Screenshot%202023-12-25%20at%2023-19-08%20Exercise%20Diary.png)
 
 ## Quick start
 
 ```sh
 docker run --name exdiary \
 -e "TZ=Asia/Novosibirsk" \
--v ~/.dockerdata/CheckList:/data/CheckList \
+-v ~/.dockerdata/ClickAHabit:/data/ClickAHabit \
 -p 8851:8851 \
 aceberg/exercisediary
 ```
@@ -39,18 +39,17 @@ Configuration can be done through config file or environment variables
 | Variable  | Description | Default |
 | --------  | ----------- | ------- |
 | HOST | Listen address | 0.0.0.0 |
-| PORT   | Port for web GUI | 8851 |
+| PORT   | Port for web GUI | 8852 |
 | THEME | Any theme name from https://bootswatch.com in lowcase or [additional](https://github.com/aceberg/aceberg-bootswatch-fork) (emerald, grass, sand)| grass |
 | COLOR | Background color: light or dark | light |
-| HEATCOLOR | HeatMap color | #03a70c |
-| PAGESTEP | Items on one page | 10 |
+| BTNWIDTH | Adjust buttons to theme | 185px |
 | TZ | Set your timezone for correct time | "" |
 
 ## Options
 
 | Key  | Description | Default | 
 | --------  | ----------- | ------- | 
-| -d | Path to config dir | /data/CheckList | 
+| -d | Path to config dir | /data/ClickAHabit | 
 | -n | Path to local JS and Themes ([node-bootstrap](https://github.com/aceberg/my-dockerfiles/tree/main/node-bootstrap)) | "" | 
 
 ## Local network only
@@ -63,7 +62,7 @@ docker run --name node-bootstrap       \
 ```
 ```sh
 docker run --name exdiary \
-    -v ~/.dockerdata/CheckList:/data/CheckList \
+    -v ~/.dockerdata/ClickAHabit:/data/ClickAHabit \
     -p 8851:8851 \
     aceberg/exercisediary -n "http://$YOUR_IP:8850"
 ```

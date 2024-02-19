@@ -5,10 +5,10 @@ import (
 
 	_ "time/tzdata"
 
-	"github.com/aceberg/CheckList/internal/web"
+	"github.com/aceberg/ClickAHabit/internal/web"
 )
 
-const dirPath = "/data/CheckList"
+const dirPath = "/data/ClickAHabit"
 const nodePath = ""
 
 func main() {

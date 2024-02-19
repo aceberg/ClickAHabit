@@ -3,7 +3,7 @@ package web
 import (
 	"embed"
 
-	"github.com/aceberg/CheckList/internal/models"
+	"github.com/aceberg/ClickAHabit/internal/models"
 )
 
 var (

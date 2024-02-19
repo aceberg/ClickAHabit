@@ -6,7 +6,7 @@ services:
     ports:
     - 8851:8851
     volumes:
-    - ~/.dockerdata/CheckList:/data/CheckList
+    - ~/.dockerdata/ClickAHabit:/data/ClickAHabit
     environment:
       TZ: Asia/Novosibirsk    # required, default: ""
       HOST: "0.0.0.0"         # optional, default: 0.0.0.0

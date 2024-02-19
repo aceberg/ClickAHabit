@@ -1,4 +1,4 @@
-PKG_NAME=CheckList
+PKG_NAME=ClickAHabit
 USR_NAME=aceberg
 
 mod:

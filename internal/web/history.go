@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/aceberg/CheckList/internal/db"
-	"github.com/aceberg/CheckList/internal/models"
+	"github.com/aceberg/ClickAHabit/internal/db"
+	"github.com/aceberg/ClickAHabit/internal/models"
 )
 
 func histHandler(c *gin.Context) {

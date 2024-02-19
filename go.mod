@@ -1,4 +1,4 @@
-module github.com/aceberg/CheckList
+module github.com/aceberg/ClickAHabit
 
 go 1.21.7
 

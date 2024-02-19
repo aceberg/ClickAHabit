@@ -4,7 +4,7 @@ import (
 	// "log"
 	"net/http"
 
-	// "github.com/aceberg/CheckList/internal/db"
+	// "github.com/aceberg/ClickAHabit/internal/db"
 	"github.com/gin-gonic/gin"
 )
 

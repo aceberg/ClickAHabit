@@ -20,7 +20,10 @@ function getGroupMap(checks) {
         tmpChecks.push(checks[i]);
         groupMap.set(checks[i].Group, tmpChecks);
     }
-    return groupMap
+
+    let mapAsc = new Map([...groupMap.entries()].sort());
+
+    return mapAsc
 }
 
 async function createView(date) {

@@ -2,14 +2,14 @@ FROM golang:alpine AS builder
 
 RUN apk add build-base
 COPY . /src
-RUN cd /src/cmd/CheckList/ && CGO_ENABLED=0 go build -o /CheckList .
+RUN cd /src/cmd/ClickAHabit/ && CGO_ENABLED=0 go build -o /ClickAHabit .
 
 
 FROM scratch
 
-WORKDIR /data/CheckList
+WORKDIR /data/ClickAHabit
 WORKDIR /app
 
-COPY --from=builder /CheckList /app/
+COPY --from=builder /ClickAHabit /app/
 
-ENTRYPOINT ["./CheckList"]
+ENTRYPOINT ["./ClickAHabit"]

@@ -6,9 +6,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/aceberg/CheckList/internal/check"
-	"github.com/aceberg/CheckList/internal/conf"
-	"github.com/aceberg/CheckList/internal/models"
+	"github.com/aceberg/ClickAHabit/internal/check"
+	"github.com/aceberg/ClickAHabit/internal/conf"
+	"github.com/aceberg/ClickAHabit/internal/models"
 )
 
 func configHandler(c *gin.Context) {

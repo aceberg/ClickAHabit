@@ -3,8 +3,8 @@ package conf
 import (
 	"github.com/spf13/viper"
 
-	"github.com/aceberg/CheckList/internal/check"
-	"github.com/aceberg/CheckList/internal/models"
+	"github.com/aceberg/ClickAHabit/internal/check"
+	"github.com/aceberg/ClickAHabit/internal/models"
 )
 
 // Get - read config from file or env
@@ -13,9 +13,9 @@ func Get(path string) models.Conf {
 
 	viper.SetDefault("HOST", "0.0.0.0")
 	viper.SetDefault("PORT", "8852")
-	viper.SetDefault("THEME", "journal")
+	viper.SetDefault("THEME", "united")
 	viper.SetDefault("COLOR", "light")
-	viper.SetDefault("BTNWIDTH", "185px")
+	viper.SetDefault("BTNWIDTH", "195px")
 
 	viper.SetConfigFile(path)
 	viper.SetConfigType("yaml")

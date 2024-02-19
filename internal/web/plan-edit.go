@@ -1,14 +1,13 @@
 package web
 
 import (
-	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/aceberg/CheckList/internal/models"
-	"github.com/aceberg/CheckList/internal/yaml"
+	"github.com/aceberg/ClickAHabit/internal/models"
+	"github.com/aceberg/ClickAHabit/internal/yaml"
 )
 
 func editHandler(c *gin.Context) {
@@ -52,8 +51,6 @@ func savePlanHandler(c *gin.Context) {
 
 	plan.ID, _ = strconv.Atoi(id)
 	plan.Place, _ = strconv.Atoi(place)
-
-	log.Println("NOCOL:", nocolor)
 
 	if plan.ID > 0 {
 		deletePlan(plan.ID)
