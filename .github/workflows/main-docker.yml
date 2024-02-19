@@ -9,7 +9,7 @@ on:
   #   - 'src/**'
 
 env:
-  IMAGE_NAME: exercisediary
+  IMAGE_NAME: clickahabit
 
 jobs:
   build:

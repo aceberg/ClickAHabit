@@ -1,20 +1,20 @@
-[![Main-Docker](https://github.com/aceberg/exercisediary/actions/workflows/main-docker.yml/badge.svg)](https://github.com/aceberg/exercisediary/actions/workflows/main-docker.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/aceberg/exercisediary)](https://goreportcard.com/report/github.com/aceberg/exercisediary)
+[![Main-Docker](https://github.com/aceberg/clickahabit/actions/workflows/main-docker.yml/badge.svg)](https://github.com/aceberg/clickahabit/actions/workflows/main-docker.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/aceberg/clickahabit)](https://goreportcard.com/report/github.com/aceberg/clickahabit)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e8f67994120fc7936aeb/maintainability)](https://codeclimate.com/github/aceberg/ClickAHabit/maintainability)
-![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/aceberg/exercisediary)
+![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/aceberg/clickahabit)
 
-<h1><a href="https://github.com/aceberg/exercisediary">
-    <img src="https://raw.githubusercontent.com/aceberg/exercisediary/main/assets/logo.png" width="35" />
+<h1><a href="https://github.com/aceberg/clickahabit">
+    <img src="https://raw.githubusercontent.com/aceberg/clickahabit/main/assets/logo.png" width="35" />
 </a>Click A Habit</h1>
 
-Workout diary with GitHub-style year visualization
+Work in progress
 
-- [Quick start](https://github.com/aceberg/exercisediary#quick-start)
-- [Config](https://github.com/aceberg/exercisediary#config)
-- [Options](https://github.com/aceberg/exercisediary#options)
-- [Local network only](https://github.com/aceberg/exercisediary#local-network-only)
+- [Quick start](https://github.com/aceberg/clickahabit#quick-start)
+- [Config](https://github.com/aceberg/clickahabit#config)
+- [Options](https://github.com/aceberg/clickahabit#options)
+- [Local network only](https://github.com/aceberg/clickahabit#local-network-only)
 - [Roadmap](https://github.com/aceberg/ClickAHabit/blob/main/docs/ROADMAP.md)
-- [Thanks](https://github.com/aceberg/exercisediary#thanks)
+- [Thanks](https://github.com/aceberg/clickahabit#thanks)
 
 
 ![Screenshot](https://raw.githubusercontent.com/aceberg/ClickAHabit/main/assets/Screenshot%202023-12-25%20at%2023-19-08%20Exercise%20Diary.png)
@@ -22,11 +22,11 @@ Workout diary with GitHub-style year visualization
 ## Quick start
 
 ```sh
-docker run --name exdiary \
+docker run --name clickahabit \
 -e "TZ=Asia/Novosibirsk" \
 -v ~/.dockerdata/ClickAHabit:/data/ClickAHabit \
--p 8851:8851 \
-aceberg/exercisediary
+-p 8852:8852 \
+aceberg/clickahabit
 ```
 Or use [docker-compose.yml](docker-compose.yml)
 
@@ -61,18 +61,18 @@ docker run --name node-bootstrap       \
     aceberg/node-bootstrap
 ```
 ```sh
-docker run --name exdiary \
+docker run --name clickahabit \
     -v ~/.dockerdata/ClickAHabit:/data/ClickAHabit \
-    -p 8851:8851 \
-    aceberg/exercisediary -n "http://$YOUR_IP:8850"
+    -p 8852:8852 \
+    aceberg/clickahabit -n "http://$YOUR_IP:8850"
 ```
 Or use [docker-compose](docker-compose-local.yml)
 
 ## Roadmap
-Moved to [docs/ROADMAP.md](docs/ROADMAP.md)
+
 
 ## Thanks
-- All go packages listed in [dependencies](https://github.com/aceberg/exercisediary/network/dependencies)
+- All go packages listed in [dependencies](https://github.com/aceberg/clickahabit/network/dependencies)
 - [Bootstrap](https://getbootstrap.com/)
 - Themes: [Free themes for Bootstrap](https://bootswatch.com)
 - [Chart.js](https://github.com/chartjs/Chart.js) and [chartjs-chart-matrix](https://github.com/kurkle/chartjs-chart-matrix)

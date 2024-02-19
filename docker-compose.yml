@@ -1,15 +1,15 @@
 version: "3"
 services:
-  exdiary:
-    image: aceberg/exercisediary
+  clickahabit:
+    image: aceberg/clickahabit
     restart: unless-stopped
     ports:
-    - 8851:8851
+    - 8852:8852
     volumes:
     - ~/.dockerdata/ClickAHabit:/data/ClickAHabit
     environment:
       TZ: Asia/Novosibirsk    # required, default: ""
       HOST: "0.0.0.0"         # optional, default: 0.0.0.0
-      PORT: "8851"            # optional, default: 8851
-      THEME: "grass"          # optional, default: grass
+      PORT: "8852"            # optional, default: 8852
+      THEME: "united"         # optional, default: united
       COLOR: "light"          # optional, default: light

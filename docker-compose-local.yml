@@ -7,19 +7,19 @@ services:
     - 8850:8850
     volumes:
     - ~/.dockerdata/icons:/app/icons  # For local icons
-  exdiary:
-    image: aceberg/exercisediary
+  clickahabit:
+    image: aceberg/clickahabit
     restart: unless-stopped
     ports:
-    - 8851:8851
+    - 8852:8852
     command: "-n http://YOUR_IP:8850" # Put your server IP or DNS name here
     depends_on:
       - node-bootstrap
     volumes:
     - ~/.dockerdata/ClickAHabit:/data/ClickAHabit       # app data (set your own path instead of dockerdata)
     environment:
-      TZ: Asia/Novosibirsk    # required, default ""
+      TZ: Asia/Novosibirsk    # required, default: ""
       HOST: "0.0.0.0"         # optional, default: 0.0.0.0
-      PORT: "8851"            # optional, default: 8851
-      THEME: "grass"          # optional, default: grass
+      PORT: "8852"            # optional, default: 8852
+      THEME: "united"         # optional, default: united
       COLOR: "light"          # optional, default: light
