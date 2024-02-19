@@ -1,6 +1,8 @@
+var layout;
 
 function setToday() {
     let today = new Date().toLocaleDateString('en-CA');
+    layout = localStorage.getItem("layout");
     
     createView(today);
 }
@@ -45,9 +47,17 @@ async function createView(date) {
 }
 
 function genHTML(gr, checks) {
-    let btn = '';
-    let html = `<h5>${gr}</h5>`;
+    let btn = ''; vcol = ''; vdiv = ''; hcol = ''; hdiv = ''; icon = '';
+    if (layout == 'vert') {
+        vcol = '<div class="col-md-auto">';
+        vdiv = '</div>';
+    } else {
+        hcol = '<div class="col-md-auto">';
+        hdiv = '</div>';
+    }
+    let html = vcol + `<h5>${gr}</h5>`;
     let len = checks.length;
+
     for (let i = 0 ; i < len; i++) {
         btn = `btn btn-lg`;
         if (checks[i].Count) {
@@ -55,12 +65,16 @@ function genHTML(gr, checks) {
         } else {
             btn = btn + ` btn-outline-primary"`;
         }
-        html = html + `
-        <div class="col-md-auto">
-            <a href="#" onclick="addOne(${checks[i].ID})"><p>
+        if (checks[i].Icon) {
+            icon = `<img src="${checks[i].Icon}" style="height:1.3em;"/>&nbsp;`;
+        } else {
+            icon = '';
+        }
+        html = html + hcol + `
+            <a href="#" onclick="addOne(${checks[i].ID})"></p>
                 <div class="btn-group btn-group-lg">
                     <button id="btn${checks[i].ID}" class="my-btn-lg ${btn} style="border-left-width: thick; border-left-color: ${checks[i].Color};">
-                        <img src="${checks[i].Icon}" style="height:1.3em;"/>&nbsp;
+                        ${icon}
                         ${checks[i].Name}
                     </button>
                     <button id="count${checks[i].ID}" class="${btn}>
@@ -68,8 +82,9 @@ function genHTML(gr, checks) {
                     </button>
                 </div>
             </p></a>
-        </div>`;
+        ` + hdiv;
     }
+    html = html + vdiv;
 
     document.getElementById('checkList').insertAdjacentHTML('beforeend', html);
 }
@@ -115,4 +130,16 @@ async function updatePlan() {
     resp = await (await fetch(url)).json();
 
     createView(date);
+}
+
+function toggleLayout() {
+
+    if (layout == 'vert') {
+        layout = '';
+    } else {
+        layout = 'vert';
+    }
+    localStorage.setItem("layout", layout);
+
+    setToday();
 }
