@@ -7,7 +7,7 @@
     <img src="https://raw.githubusercontent.com/aceberg/clickahabit/main/assets/logo.png" width="35" />
 </a>Click A Habit</h1>
 
-Work in progress
+Daily habit tracker and counter
 
 - [Quick start](https://github.com/aceberg/clickahabit#quick-start)
 - [Config](https://github.com/aceberg/clickahabit#config)
@@ -17,7 +17,12 @@ Work in progress
 - [Thanks](https://github.com/aceberg/clickahabit#thanks)
 
 
-![Screenshot](https://raw.githubusercontent.com/aceberg/ClickAHabit/main/assets/Screenshot%202023-12-25%20at%2023-19-08%20Exercise%20Diary.png)
+![Screenshot](https://raw.githubusercontent.com/aceberg/ClickAHabit/main/assets/Screenshot.png)
+<details>
+  <summary>More Themes</summary>
+  <img src="https://raw.githubusercontent.com/aceberg/ClickAHabit/main/assets/Screenshot1.png">
+  <img src="https://raw.githubusercontent.com/aceberg/ClickAHabit/main/assets/Screenshot2.png">
+</details> 
 
 ## Quick start
 
@@ -40,9 +45,9 @@ Configuration can be done through config file or environment variables
 | --------  | ----------- | ------- |
 | HOST | Listen address | 0.0.0.0 |
 | PORT   | Port for web GUI | 8852 |
-| THEME | Any theme name from https://bootswatch.com in lowcase or [additional](https://github.com/aceberg/aceberg-bootswatch-fork) (emerald, grass, sand)| grass |
+| THEME | Any theme name from https://bootswatch.com in lowcase or [additional](https://github.com/aceberg/aceberg-bootswatch-fork) (emerald, grass, sand)| united |
 | COLOR | Background color: light or dark | light |
-| BTNWIDTH | Adjust buttons to theme | 185px |
+| BTNWIDTH | Adjust buttons to theme | 195px |
 | TZ | Set your timezone for correct time | "" |
 
 ## Options
@@ -75,5 +80,4 @@ Or use [docker-compose](docker-compose-local.yml)
 - All go packages listed in [dependencies](https://github.com/aceberg/clickahabit/network/dependencies)
 - [Bootstrap](https://getbootstrap.com/)
 - Themes: [Free themes for Bootstrap](https://bootswatch.com)
-- [Chart.js](https://github.com/chartjs/Chart.js) and [chartjs-chart-matrix](https://github.com/kurkle/chartjs-chart-matrix)
 - Favicon and logo: [Flaticon](https://www.flaticon.com/icons/)
