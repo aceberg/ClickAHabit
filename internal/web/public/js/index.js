@@ -55,7 +55,7 @@ function genHTML(gr, checks) {
         hcol = '<div class="col-md-auto">';
         hdiv = '</div>';
     }
-    let html = vcol + `<h5>${gr}</h5>`;
+    let html = vcol + `<a href="/plan/?gr=${gr}"><h5>${gr}</h5></a>`;
     let len = checks.length;
 
     for (let i = 0 ; i < len; i++) {

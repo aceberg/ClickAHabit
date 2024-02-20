@@ -15,11 +15,18 @@ func planHandler(c *gin.Context) {
 
 	guiData.Config = appConfig
 
+	gr, ok := c.GetQuery("gr")
+
 	for i := range allPlans {
 		allPlans[i].ID = i + 1
+		if ok && (allPlans[i].Group == gr) {
+			guiData.Plans = append(guiData.Plans, allPlans[i])
+		}
 	}
 
-	guiData.Plans = allPlans
+	if !ok {
+		guiData.Plans = allPlans
+	}
 
 	c.HTML(http.StatusOK, "header.html", guiData)
 	c.HTML(http.StatusOK, "plan.html", guiData)
