@@ -2,7 +2,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.2.0] - 2024-02-20
+## [0.1.1] - 2024-02-20
 ### Added
 - Add/Edit plan
 - Button width in config
