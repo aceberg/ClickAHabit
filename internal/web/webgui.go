@@ -47,16 +47,16 @@ func Gui(dirPath, nodePath string) {
 
 	router.StaticFS("/fs/", http.FS(pubFS)) // public
 
-	router.GET("/", indexHandler)            // index.go
-	router.GET("/add/:id", addHandler)       // add.go
-	router.GET("/config/", configHandler)    // config.go
-	router.GET("/date/:date", dateHandler)   // date.go
-	router.GET("/histdel/:id", histDel)      // history.go
-	router.GET("/history/", histHandler)     // history.go
-	router.GET("/plan/", planHandler)        // plan.go
-	router.GET("/planedit/:id", editHandler) // plan-edit.go
-	router.GET("/plandel/:id", planDel)      // plan.go
-	router.GET("/update/:date", updatePlan)  // update.go
+	router.GET("/", indexHandler)             // index.go
+	router.GET("/add/:id", addHandler)        // add.go
+	router.GET("/config/", configHandler)     // config.go
+	router.GET("/date/:date", dateHandler)    // date.go
+	router.GET("/histdel/:id", histDel)       // history.go
+	router.GET("/history/:date", histHandler) // history.go
+	router.GET("/plan/", planHandler)         // plan.go
+	router.GET("/planedit/:id", editHandler)  // plan-edit.go
+	router.GET("/plandel/:id", planDel)       // plan.go
+	router.GET("/update/:date", updatePlan)   // update.go
 
 	router.POST("/config/", saveConfigHandler) // config.go
 	router.POST("/planedit/", savePlanHandler) // plan-edit.go

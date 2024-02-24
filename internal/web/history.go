@@ -13,10 +13,21 @@ import (
 func histHandler(c *gin.Context) {
 	var guiData models.GuiData
 
+	date := c.Param("date")
+
 	guiData.Config = appConfig
 	allChecks = db.Select(appConfig.DBPath)
 
-	guiData.Checks = allChecks
+	if date == "today" {
+		date = setToday()
+	}
+	guiData.Version = date
+
+	for _, check := range allChecks {
+		if check.Date == date {
+			guiData.Checks = append(guiData.Checks, check)
+		}
+	}
 
 	c.HTML(http.StatusOK, "header.html", guiData)
 	c.HTML(http.StatusOK, "history.html", guiData)

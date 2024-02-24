@@ -75,8 +75,8 @@ Or use [docker-compose](docker-compose-local.yml)
 
 ## Roadmap
 
+- [x] History filter
 - [ ] Auth
-- [ ] History filter
 - [ ] Statistics page
 
 ## Thanks

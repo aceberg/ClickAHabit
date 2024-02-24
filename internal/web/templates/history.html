@@ -1,8 +1,22 @@
 {{ define "history.html" }}
-
+<link rel="stylesheet" type="text/css" href="/fs/public/css/index.css" />
+<script src="/fs/public/js/history.js"></script>
 <body>
     <div class="container-lg mt-3 table-responsive">
         <div class="card border-primary">
+            <div class="card-header">
+            <div class="row">
+                <div class="col-md"></div>
+                <div class="col-md">
+                    <div class="gap-3 hstack">
+                        <button onclick='setFormDate(-1)' class="btn tr-button"><i class="bi bi-arrow-left-square" title="Back"></i></button>
+                        <input type="date" value="{{ .Version }}" class="m-auto form-control" onchange='setFormDate()' id="realDate" style="width: 70%;">
+                        <button onclick='setFormDate(+1)' class="btn tr-button"><i class="bi bi-arrow-right-square" title="Forward"></i></button>
+                    </div>
+                </div>
+                <div class="col-md"></div>
+            </div>
+            </div>
             <div class="card-body table-responsive">
                 <table class="table table-striped table-hover">
                     <thead>

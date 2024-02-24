@@ -7,9 +7,15 @@ import (
 	"github.com/aceberg/ClickAHabit/internal/models"
 )
 
+func setToday() string {
+	date := time.Now().Format("2006-01-02")
+
+	return date
+}
+
 func setTodayChecks() {
 
-	date := time.Now().Format("2006-01-02")
+	date := setToday()
 	lastToday = date
 	setChecksForDate(date)
 }
