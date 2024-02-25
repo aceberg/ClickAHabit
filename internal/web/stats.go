@@ -10,6 +10,8 @@ import (
 	"github.com/aceberg/ClickAHabit/internal/models"
 )
 
+var statsMap map[string]models.Stat
+
 func statsHandler(c *gin.Context) {
 	var guiData models.GuiData
 	var key string
@@ -17,7 +19,7 @@ func statsHandler(c *gin.Context) {
 	allChecks = db.Select(appConfig.DBPath)
 	guiData.Config = appConfig
 
-	statsMap := make(map[string]models.Stat)
+	statsMap = make(map[string]models.Stat)
 
 	for _, check := range allChecks {
 		if check.Count != 0 {
@@ -33,7 +35,7 @@ func statsHandler(c *gin.Context) {
 				stat.DTotal = 1
 				stat.CTotal = check.Count
 			}
-
+			stat.Checks = append(stat.Checks, check)
 			statsMap[key] = stat
 		}
 	}

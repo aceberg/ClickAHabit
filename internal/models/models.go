@@ -40,12 +40,9 @@ type Check struct {
 type Stat struct {
 	Name   string
 	Group  string
-	DWeek  int
-	DMonth int
 	DTotal int
-	CWeek  int
-	CMonth int
 	CTotal int
+	Checks []Check
 }
 
 // GuiData - web gui data
