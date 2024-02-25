@@ -1,0 +1,33 @@
+{{ define "stats.html" }}
+
+<body>
+    <div class="container-lg mt-3">
+        <div class="card border-primary">
+            <div class="card-header">
+                <h5>Stats</h5>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <th>Group</th>
+                        <th>Name</th>
+                        <th>Days Total</th>
+                        <th>Count Total</th>
+                    </thead>
+                    <tbody>
+                        {{ range .Stats }}
+                        <tr>
+                            <td>{{ .Group }}</td>
+                            <td>{{ .Name }}</td>
+                            <td>{{ .DTotal }}</td>
+                            <td>{{ .CTotal }}</td>
+                        </tr>
+                        {{ end }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{{ template "footer.html" }}
+{{ end }}

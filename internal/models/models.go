@@ -36,6 +36,18 @@ type Check struct {
 	Count int    `db:"COUNT"`
 }
 
+// Stat - statistic
+type Stat struct {
+	Name   string
+	Group  string
+	DWeek  int
+	DMonth int
+	DTotal int
+	CWeek  int
+	CMonth int
+	CTotal int
+}
+
 // GuiData - web gui data
 type GuiData struct {
 	Config  Conf
@@ -44,4 +56,5 @@ type GuiData struct {
 	OnePlan Plan
 	Plans   []Plan
 	Checks  []Check
+	Stats   map[string]Stat
 }
