@@ -75,9 +75,9 @@ Or use [docker-compose](docker-compose-local.yml)
 
 ## Roadmap
 
-- [x] History filter
 - [ ] Auth
-- [ ] Statistics page
+- [x] History filter
+- [x] Statistics page
 
 ## Thanks
 - All go packages listed in [dependencies](https://github.com/aceberg/clickahabit/network/dependencies)
