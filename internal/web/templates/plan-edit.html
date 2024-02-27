@@ -6,6 +6,9 @@
     <div class="row">
         <div class="col-md">
         <div class="card border-primary">
+            <div class="card-header">
+                <h5>Add/Edit</h5>
+            </div>
         <div class="card-body table-responsive">
         <table class="table table-borderless">
             <form action="/planedit/" method="post">
@@ -51,7 +54,13 @@
         </div>
         </div>
         <div class="col-md">
-            
+            <div class="card border-primary">
+                <div class="card-header">
+                    <h5>Icon preview</h5>
+                </div>
+            <div class="card-body table-responsive">
+                <img src="{{ .OnePlan.Icon }}" style="max-width: 100%;max-height: 100%;"/>
+            </div>
         </div>
     </div>
     </div>

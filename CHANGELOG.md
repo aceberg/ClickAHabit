@@ -2,6 +2,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.1.4] - 2024-02-27
+### Fixed
+- History bug fix
+
 ## [0.1.3] - 2024-02-26
 ### Added
 - Statistics page

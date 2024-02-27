@@ -42,5 +42,5 @@ func histDel(c *gin.Context) {
 		db.Delete(appConfig.DBPath, ID)
 	}
 
-	c.Redirect(http.StatusFound, "/history/")
+	c.Redirect(http.StatusFound, "/history/today")
 }
