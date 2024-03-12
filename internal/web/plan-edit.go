@@ -43,6 +43,7 @@ func savePlanHandler(c *gin.Context) {
 	plan.Icon = c.PostForm("icon")
 	place := c.PostForm("place")
 	nocolor := c.PostForm("nocolor")
+	plan.Link = c.PostForm("link")
 
 	if nocolor == "yes" {
 		plan.NoColor = true

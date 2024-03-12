@@ -22,6 +22,8 @@ type Plan struct {
 	NoColor bool   `yaml:"nocolor,omitempty"`
 	Icon    string `yaml:"icon,omitempty"`
 	Place   int    `yaml:"place,omitempty"`
+	Link    string `yaml:"link,omitempty"`
+	Repeat  string `yaml:"repeat,omitempty"`
 }
 
 // Check - check for DB
@@ -34,6 +36,7 @@ type Check struct {
 	Icon  string `db:"ICON"`
 	Place int    `db:"PLACE"`
 	Count int    `db:"COUNT"`
+	Link  string `db:"LINK"`
 }
 
 // Stat - statistic

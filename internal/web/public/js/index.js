@@ -71,8 +71,8 @@ function genHTML(gr, checks) {
             icon = '';
         }
         html = html + hcol + `
-            <a href="#" onclick="addOne(${checks[i].ID})"></p>
-                <div class="btn-group btn-group-lg">
+            </p>
+                <div id="menu${checks[i].ID}" class="btn-group btn-group-lg" onclick="addOne(${checks[i].ID});" oncontextmenu="showMenu(event,${checks[i].ID}, '${checks[i].Link}');">
                     <button id="btn${checks[i].ID}" class="my-btn-lg ${btn} style="border-left-width: thick; border-left-color: ${checks[i].Color};">
                         ${icon}
                         ${checks[i].Name}
@@ -81,7 +81,7 @@ function genHTML(gr, checks) {
                         ${checks[i].Count}
                     </button>
                 </div>
-            </p></a>
+            </p>
         ` + hdiv;
     }
     html = html + vdiv;
@@ -142,4 +142,40 @@ function toggleLayout() {
     localStorage.setItem("layout", layout);
 
     setToday();
+}
+
+function showMenu(e, id, link) {
+    let linkBtn = '';
+
+    console.log("LINK ="+ link);
+
+    e.preventDefault()
+    let menu = document.createElement("div");
+    menu.id = "ctxmenu"
+    menu.className ="btn-group-vertical"
+    menu.style.display = "block";
+    // menu.style.position= "fixed";
+    menu.style.top = e.pageY + 20 + 'px';
+    menu.style.left = e.pageX + 'px';
+    menu.onmouseleave = () => ctxmenu.outerHTML = ''
+    if (link !== '') {
+        linkBtn = `<button class="btn" onclick="window.open('${link}', '_blank');">Open Link in a New Tab</button>`;
+    }
+    menu.innerHTML = linkBtn +`
+        <button class="btn">Statistics</button>
+        <button class="btn" onclick="histDel(${id});">Reset Todays Counter</button>`
+    
+    document.getElementById('checkList').appendChild(menu);
+}
+
+async function histDel(id) {
+
+    let url = '/histdel/'+id;
+    resp = await (await fetch(url));
+
+    document.getElementById('count'+id).innerHTML = 0;
+    document.getElementById('btn'+id).classList.remove('btn-primary');
+    document.getElementById('count'+id).classList.remove('btn-primary');
+    document.getElementById('btn'+id).classList.add('btn-outline-primary');
+    document.getElementById('count'+id).classList.add('btn-outline-primary');
 }

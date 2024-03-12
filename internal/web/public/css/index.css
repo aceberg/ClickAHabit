@@ -7,6 +7,21 @@
 .tr-button:hover {
     background-color: #0000001a;
 }
+
+#ctxmenu {
+    position: fixed;
+    background-color: var(--bs-body-bg);
+    max-width: 17em;
+}
+#ctxmenu > button {
+    /* padding: 0 1rem; */
+    background-color: var(--bs-body-bg);
+    border: 1px solid var(--bs-primary);
+} 
+#ctxmenu > button:hover {
+    background-color: var(--bs-primary);
+}
+
 @media (max-width: 1299px) {
     .horiz-scroll {
         overflow-x: scroll;

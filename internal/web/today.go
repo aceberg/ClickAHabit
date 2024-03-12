@@ -34,6 +34,7 @@ func setChecksForDate(date string) (todayChecks []models.Check) {
 			check.Color = plan.Color
 			check.Icon = plan.Icon
 			check.Place = plan.Place
+			check.Link = plan.Link
 			todayChecks = append(todayChecks, check)
 			db.Insert(appConfig.DBPath, check)
 			changedDB = true
