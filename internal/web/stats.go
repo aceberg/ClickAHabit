@@ -3,6 +3,7 @@ package web
 import (
 	// "log"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 
@@ -15,6 +16,12 @@ var statsMap map[string]models.Stat
 func statsHandler(c *gin.Context) {
 	var guiData models.GuiData
 	var key string
+	var ID int
+
+	idStr := c.Param("id")
+	if idStr != "total" {
+		ID, _ = strconv.Atoi(idStr)
+	}
 
 	allChecks = db.Select(appConfig.DBPath)
 	guiData.Config = appConfig
@@ -35,8 +42,13 @@ func statsHandler(c *gin.Context) {
 				stat.DTotal = 1
 				stat.CTotal = check.Count
 			}
+
 			stat.Checks = append(stat.Checks, check)
 			statsMap[key] = stat
+		}
+
+		if check.ID == ID {
+			guiData.Version = check.Group + ": " + check.Name
 		}
 	}
 

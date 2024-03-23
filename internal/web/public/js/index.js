@@ -147,7 +147,7 @@ function toggleLayout() {
 function showMenu(e, id, link) {
     let linkBtn = '';
 
-    console.log("LINK ="+ link);
+    // console.log("LINK ="+ link);
 
     e.preventDefault()
     let menu = document.createElement("div");
@@ -162,7 +162,7 @@ function showMenu(e, id, link) {
         linkBtn = `<button class="btn" onclick="window.open('${link}', '_blank');">Open Link in a New Tab</button>`;
     }
     menu.innerHTML = linkBtn +`
-        <button class="btn">Statistics</button>
+        <button class="btn" onclick="window.open('/stats/${id}', '_self');">Statistics</button>
         <button class="btn" onclick="histDel(${id});">Reset Todays Counter</button>`
     
     document.getElementById('checkList').appendChild(menu);
