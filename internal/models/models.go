@@ -24,6 +24,7 @@ type Plan struct {
 	Place   int    `yaml:"place,omitempty"`
 	Link    string `yaml:"link,omitempty"`
 	Repeat  string `yaml:"repeat,omitempty"`
+	Pause   bool   `yaml:"pause,omitempty"`
 }
 
 // Check - check for DB
@@ -37,6 +38,10 @@ type Check struct {
 	Place int    `db:"PLACE"`
 	Count int    `db:"COUNT"`
 	Link  string `db:"LINK"`
+	Opt1  string `db:"OPT1"`
+	Opt2  string `db:"OPT2"`
+	Opt3  string `db:"OPT3"`
+	Opt4  int    `db:"OPT4"`
 }
 
 // Stat - statistic

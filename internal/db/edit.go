@@ -18,12 +18,13 @@ func Create(path string) {
 		"ICON"		TEXT,
 		"PLACE"		INTEGER,
 		"COUNT"		INTEGER,
-		"LINK" 		TEXT DEFAULT ""
+		"LINK" 		TEXT,
+		"OPT1" 		TEXT DEFAULT "",
+		"OPT2" 		TEXT DEFAULT "",
+		"OPT3" 		TEXT DEFAULT "",
+		"OPT4" 		INTEGER DEFAULT 0
 	);`
 	exec(path, sqlStatement)
-
-	// sqlStatement = `ALTER TABLE checks ADD COLUMN "LINK" TEXT DEFAULT "";`
-	// exec(path, sqlStatement)
 }
 
 // Insert - insert into DB
