@@ -170,7 +170,7 @@ function showMenu(e, id, link) {
 
 async function histDel(id) {
 
-    let url = '/histdel/'+id;
+    let url = '/del/'+id;
     resp = await (await fetch(url));
 
     document.getElementById('count'+id).innerHTML = 0;

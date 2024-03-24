@@ -30,3 +30,15 @@ func addHandler(c *gin.Context) {
 
 	c.IndentedJSON(http.StatusOK, resp)
 }
+
+func delHandler(c *gin.Context) {
+
+	IDstr := c.Param("id")
+	ID, err := strconv.Atoi(IDstr)
+
+	if err == nil {
+		db.Delete(appConfig.DBPath, ID)
+	}
+
+	c.IndentedJSON(http.StatusOK, "")
+}
