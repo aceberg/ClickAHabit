@@ -19,6 +19,11 @@ func dateHandler(c *gin.Context) {
 
 	checks := selectChecksByDate(date)
 
+	// Sort by Name
+	sort.Slice(checks, func(i, j int) bool {
+		return checks[i].Name < checks[j].Name
+	})
+
 	// Sort by Place
 	sort.Slice(checks, func(i, j int) bool {
 		return checks[i].Place < checks[j].Place

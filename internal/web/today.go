@@ -27,7 +27,7 @@ func setChecksForDate(date string) (todayChecks []models.Check) {
 	todayChecks = selectChecksByDate(date)
 
 	for _, plan := range allPlans {
-		if !inSlice(plan, todayChecks) {
+		if !inSlice(plan, todayChecks) && !plan.Pause {
 			check.Date = date
 			check.Group = plan.Group
 			check.Name = plan.Name

@@ -23,8 +23,8 @@ type Plan struct {
 	Icon    string `yaml:"icon,omitempty"`
 	Place   int    `yaml:"place,omitempty"`
 	Link    string `yaml:"link,omitempty"`
-	Repeat  string `yaml:"repeat,omitempty"`
 	Pause   bool   `yaml:"pause,omitempty"`
+	Weekly  bool   `yaml:"weekly,omitempty"`
 }
 
 // Check - check for DB

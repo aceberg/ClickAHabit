@@ -2,6 +2,7 @@ package web
 
 import (
 	"net/http"
+	"sort"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -27,6 +28,16 @@ func planHandler(c *gin.Context) {
 	if !ok {
 		guiData.Plans = allPlans
 	}
+
+	// Sort by Name
+	sort.Slice(guiData.Plans, func(i, j int) bool {
+		return guiData.Plans[i].Name < guiData.Plans[j].Name
+	})
+
+	// Sort by Group
+	sort.Slice(guiData.Plans, func(i, j int) bool {
+		return guiData.Plans[i].Group < guiData.Plans[j].Group
+	})
 
 	c.HTML(http.StatusOK, "header.html", guiData)
 	c.HTML(http.StatusOK, "plan.html", guiData)

@@ -41,13 +41,19 @@ func savePlanHandler(c *gin.Context) {
 	plan.Name = c.PostForm("name")
 	plan.Color = c.PostForm("color")
 	plan.Icon = c.PostForm("icon")
+	plan.Link = c.PostForm("link")
+
 	place := c.PostForm("place")
 	nocolor := c.PostForm("nocolor")
-	plan.Link = c.PostForm("link")
+	pause := c.PostForm("pause")
 
 	if nocolor == "yes" {
 		plan.NoColor = true
 		plan.Color = ""
+	}
+
+	if pause == "yes" {
+		plan.Pause = true
 	}
 
 	plan.ID, _ = strconv.Atoi(id)
