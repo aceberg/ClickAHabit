@@ -31,6 +31,7 @@ func Gui(dirPath, nodePath string) {
 
 	db.Create(appConfig.DBPath)
 	allChecks = db.Select(appConfig.DBPath, "checks")
+	// allWeeks = db.Select(appConfig.DBPath, "weeks")
 	allPlans = yaml.Read(appConfig.DirPath + "/plan.yaml")
 
 	address := appConfig.Host + ":" + appConfig.Port

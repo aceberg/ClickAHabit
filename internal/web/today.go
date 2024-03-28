@@ -18,13 +18,14 @@ func setTodayChecks() {
 	date := setToday()
 	lastToday = date
 	setChecksForDate(date)
+	setWeeklyForDate(date)
 }
 
 func setChecksForDate(date string) (todayChecks []models.Check) {
 	var changedDB bool
 	var check models.Check
 
-	todayChecks = selectChecksByDate(date)
+	todayChecks = selectChecksByDate("checks", date)
 
 	for _, plan := range allPlans {
 		if !inSlice(plan, todayChecks) && !plan.Pause && !plan.Weekly {
@@ -43,17 +44,17 @@ func setChecksForDate(date string) (todayChecks []models.Check) {
 
 	if changedDB {
 		allChecks = db.Select(appConfig.DBPath, "checks")
-		todayChecks = selectChecksByDate(date)
+		todayChecks = selectChecksByDate("checks", date)
 	}
 
 	return todayChecks
 }
 
-func selectChecksByDate(date string) (returnChecks []models.Check) {
+func selectChecksByDate(tabname string, date string) (returnChecks []models.Check) {
 
-	allChecks = db.Select(appConfig.DBPath, "checks")
+	checks := db.Select(appConfig.DBPath, tabname)
 
-	for _, check := range allChecks {
+	for _, check := range checks {
 		if check.Date == date {
 			returnChecks = append(returnChecks, check)
 		}
