@@ -46,6 +46,7 @@ func savePlanHandler(c *gin.Context) {
 	place := c.PostForm("place")
 	nocolor := c.PostForm("nocolor")
 	pause := c.PostForm("pause")
+	weekly := c.PostForm("weekly")
 
 	if nocolor == "yes" {
 		plan.NoColor = true
@@ -54,6 +55,10 @@ func savePlanHandler(c *gin.Context) {
 
 	if pause == "yes" {
 		plan.Pause = true
+	}
+
+	if weekly == "yes" {
+		plan.Weekly = true
 	}
 
 	plan.ID, _ = strconv.Atoi(id)

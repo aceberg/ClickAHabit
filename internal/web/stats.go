@@ -23,7 +23,7 @@ func statsHandler(c *gin.Context) {
 		ID, _ = strconv.Atoi(idStr)
 	}
 
-	allChecks = db.Select(appConfig.DBPath)
+	allChecks = db.Select(appConfig.DBPath, "checks")
 	guiData.Config = appConfig
 
 	statsMap = make(map[string]models.Stat)

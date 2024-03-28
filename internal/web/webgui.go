@@ -22,7 +22,7 @@ func Gui(dirPath, nodePath string) {
 	appConfig = conf.Get(confPath)
 
 	appConfig.DirPath = dirPath
-	appConfig.DBPath = dirPath + "/sqlite.db"
+	appConfig.DBPath = dirPath + "/sqlite1.db"
 	check.Path(appConfig.DBPath)
 	appConfig.ConfPath = confPath
 	appConfig.NodePath = nodePath
@@ -30,7 +30,7 @@ func Gui(dirPath, nodePath string) {
 	log.Println("INFO: starting web gui with config", appConfig.ConfPath)
 
 	db.Create(appConfig.DBPath)
-	allChecks = db.Select(appConfig.DBPath)
+	allChecks = db.Select(appConfig.DBPath, "checks")
 	allPlans = yaml.Read(appConfig.DirPath + "/plan.yaml")
 
 	address := appConfig.Host + ":" + appConfig.Port
@@ -58,6 +58,7 @@ func Gui(dirPath, nodePath string) {
 	router.GET("/stats/:id", statsHandler)   // stats.go
 	router.GET("/smore/:key", statsMore)     // stats-more.go
 	router.GET("/update/:date", updatePlan)  // update.go
+	router.GET("/weekly/", weeklyHandler)    // weekly.go
 
 	router.POST("/config/", saveConfigHandler) // config.go
 	router.POST("/planedit/", savePlanHandler) // plan-edit.go

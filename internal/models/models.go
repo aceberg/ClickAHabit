@@ -38,10 +38,6 @@ type Check struct {
 	Place int    `db:"PLACE"`
 	Count int    `db:"COUNT"`
 	Link  string `db:"LINK"`
-	Opt1  string `db:"OPT1"`
-	Opt2  string `db:"OPT2"`
-	Opt3  string `db:"OPT3"`
-	Opt4  int    `db:"OPT4"`
 }
 
 // Stat - statistic

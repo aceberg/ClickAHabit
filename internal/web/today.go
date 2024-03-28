@@ -27,7 +27,7 @@ func setChecksForDate(date string) (todayChecks []models.Check) {
 	todayChecks = selectChecksByDate(date)
 
 	for _, plan := range allPlans {
-		if !inSlice(plan, todayChecks) && !plan.Pause {
+		if !inSlice(plan, todayChecks) && !plan.Pause && !plan.Weekly {
 			check.Date = date
 			check.Group = plan.Group
 			check.Name = plan.Name
@@ -36,13 +36,13 @@ func setChecksForDate(date string) (todayChecks []models.Check) {
 			check.Place = plan.Place
 			check.Link = plan.Link
 			todayChecks = append(todayChecks, check)
-			db.Insert(appConfig.DBPath, check)
+			db.Insert(appConfig.DBPath, "checks", check)
 			changedDB = true
 		}
 	}
 
 	if changedDB {
-		allChecks = db.Select(appConfig.DBPath)
+		allChecks = db.Select(appConfig.DBPath, "checks")
 		todayChecks = selectChecksByDate(date)
 	}
 
@@ -51,7 +51,7 @@ func setChecksForDate(date string) (todayChecks []models.Check) {
 
 func selectChecksByDate(date string) (returnChecks []models.Check) {
 
-	allChecks = db.Select(appConfig.DBPath)
+	allChecks = db.Select(appConfig.DBPath, "checks")
 
 	for _, check := range allChecks {
 		if check.Date == date {

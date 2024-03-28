@@ -32,11 +32,14 @@ func exec(path string, sqlStatement string) {
 }
 
 // Select - select all from DB
-func Select(path string) (checks []models.Check) {
+func Select(path string, tabname string) (checks []models.Check) {
 
 	mu.Lock()
 	dbx := connect(path)
-	err := dbx.Select(&checks, "SELECT * FROM checks ORDER BY ID DESC")
+
+	sqlStatement := `SELECT * FROM '` + tabname + `' ORDER BY ID DESC;`
+
+	err := dbx.Select(&checks, sqlStatement)
 	mu.Unlock()
 
 	check.IfError(err)

@@ -1,0 +1,34 @@
+{{ define "weekly.html" }}
+</head>
+<script src="/fs/public/js/index.js"></script>
+<body>
+<div class="container-lg">
+  <br>
+  <div class="row">
+    <div class="col-md"></div>
+    <div class="col-md">
+      <div class="gap-3 hstack">
+        <button onclick='setFormDate(-1)' class="btn tr-button"><i class="bi bi-arrow-left-square" title="Back"></i></button>
+        <input type="date" class="m-auto form-control" onchange='setFormDate()' id="realDate" style="width: 70%;">
+        <button onclick='setFormDate(+1)' class="btn tr-button"><i class="bi bi-arrow-right-square" title="Forward"></i></button>
+        <button onclick='updatePlan()' class="btn tr-button" title="Update plan">
+          <i class="bi bi-arrow-clockwise"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-md">
+      <button onclick='toggleLayout()' class="btn tr-button float-end d-none d-md-block" title="Toggle layout">
+        <i class="bi bi-layout-wtf"></i>
+      </button>
+    </div>
+  </div>
+  <br>
+  <div class="row" id="checkList">
+  </div>
+</div>
+<script>
+  setToday();
+</script>
+
+{{ template "footer.html" }}
+{{ end }}
