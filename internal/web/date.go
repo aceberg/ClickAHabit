@@ -10,6 +10,7 @@ import (
 
 func dateHandler(c *gin.Context) {
 
+	tab := c.Param("tab")
 	date := c.Param("date")
 	today := setToday()
 
@@ -17,7 +18,7 @@ func dateHandler(c *gin.Context) {
 		setTodayChecks()
 	}
 
-	checks := selectChecksByDate("checks", date)
+	checks := selectChecksByDate(tab, date)
 
 	// Sort by Name
 	sort.Slice(checks, func(i, j int) bool {

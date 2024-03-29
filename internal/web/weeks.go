@@ -1,24 +1,11 @@
 package web
 
 import (
-	"net/http"
-
-	"github.com/gin-gonic/gin"
+	"time"
 
 	"github.com/aceberg/ClickAHabit/internal/db"
 	"github.com/aceberg/ClickAHabit/internal/models"
 )
-
-func weeklyHandler(c *gin.Context) {
-	var guiData models.GuiData
-
-	guiData.Config = appConfig
-
-	setTodayChecks()
-
-	c.HTML(http.StatusOK, "header.html", guiData)
-	c.HTML(http.StatusOK, "weekly.html", guiData)
-}
 
 func setWeeklyForDate(date string) (wChecks []models.Check) {
 	var changedDB bool
@@ -35,6 +22,7 @@ func setWeeklyForDate(date string) (wChecks []models.Check) {
 			check.Icon = plan.Icon
 			check.Place = plan.Place
 			check.Link = plan.Link
+			check.Count = weekCount(check)
 			wChecks = append(wChecks, check)
 			db.Insert(appConfig.DBPath, "weeks", check)
 			changedDB = true
@@ -47,3 +35,24 @@ func setWeeklyForDate(date string) (wChecks []models.Check) {
 
 	return wChecks
 }
+
+func weekCount(check models.Check) int {
+
+	day, _ := time.Parse("2006-01-02", check.Date)
+	yesterday := day.AddDate(0, 0, -1)
+
+	yStr := yesterday.Format("2006-01-02")
+	wChecks := db.Select(appConfig.DBPath, "weeks")
+
+	for _, c := range wChecks {
+		if c.Date == yStr && c.Name == check.Name {
+			return c.Count
+		}
+	}
+
+	return 0
+}
+
+// func sameWeek(day, yesterday time.Time) bool {
+
+// }

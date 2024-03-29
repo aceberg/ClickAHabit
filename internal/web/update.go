@@ -16,8 +16,13 @@ func updatePlan(c *gin.Context) {
 
 	mu.Lock()
 
+	tab := c.Param("tab")
 	date := c.Param("date")
-	setChecksForDate(date) // today.go
+	if tab == "checks" {
+		setChecksForDate(date) // today.go
+	} else {
+		setWeeklyForDate(date) // weeks.go
+	}
 
 	mu.Unlock()
 

@@ -48,18 +48,17 @@ func Gui(dirPath, nodePath string) {
 
 	router.StaticFS("/fs/", http.FS(pubFS)) // public
 
-	router.GET("/", indexHandler)            // index.go
-	router.GET("/add/:id", addHandler)       // add-del.go
-	router.GET("/config/", configHandler)    // config.go
-	router.GET("/date/:date", dateHandler)   // date.go
-	router.GET("/del/:id", delHandler)       // add-del.go
-	router.GET("/plan/", planHandler)        // plan.go
-	router.GET("/planedit/:id", editHandler) // plan-edit.go
-	router.GET("/plandel/:id", planDel)      // plan.go
-	router.GET("/stats/:id", statsHandler)   // stats.go
-	router.GET("/smore/:key", statsMore)     // stats-more.go
-	router.GET("/update/:date", updatePlan)  // update.go
-	router.GET("/weekly/", weeklyHandler)    // weekly.go
+	router.GET("/", indexHandler)                // index.go
+	router.GET("/add/:tab/:id", addHandler)      // add-del.go
+	router.GET("/config/", configHandler)        // config.go
+	router.GET("/date/:tab/:date", dateHandler)  // date.go
+	router.GET("/del/:tab/:id", delHandler)      // add-del.go
+	router.GET("/plan/", planHandler)            // plan.go
+	router.GET("/planedit/:id", editHandler)     // plan-edit.go
+	router.GET("/plandel/:id", planDel)          // plan.go
+	router.GET("/stats/:id", statsHandler)       // stats.go
+	router.GET("/smore/:key", statsMore)         // stats-more.go
+	router.GET("/update/:tab/:date", updatePlan) // update.go
 
 	router.POST("/config/", saveConfigHandler) // config.go
 	router.POST("/planedit/", savePlanHandler) // plan-edit.go

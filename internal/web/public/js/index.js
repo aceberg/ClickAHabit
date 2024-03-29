@@ -1,8 +1,14 @@
 var layout;
+var tabname;
 
 function setToday() {
     let today = new Date().toLocaleDateString('en-CA');
     layout = localStorage.getItem("layout");
+
+    tabname = localStorage.getItem("tabname");
+    if (tabname == '') {
+        tabname = "checks"
+    }
     
     createView(today);
 }
@@ -34,7 +40,7 @@ async function createView(date) {
 
     let groupMap = new Map();
     let checks = [];
-    let url = '/date/'+date;
+    let url = '/date/'+tabname+'/'+date;
 
     checks = await (await fetch(url)).json();
     if (checks) {
@@ -91,7 +97,7 @@ function genHTML(gr, checks) {
 
 async function addOne(id) {
     let resp = '';
-    let url = '/add/'+id;
+    let url = '/add/'+tabname+'/'+id;
     resp = await (await fetch(url)).json();
 
     document.getElementById('count'+id).innerHTML = resp;
@@ -126,7 +132,7 @@ async function updatePlan() {
     date = document.getElementById('realDate').value;
 
     let resp = '';
-    let url = '/update/'+date;
+    let url = '/update/'+tabname+'/'+date;
     resp = await (await fetch(url)).json();
 
     createView(date);
@@ -141,7 +147,19 @@ function toggleLayout() {
     }
     localStorage.setItem("layout", layout);
 
-    setToday();
+    setFormDate(0);
+}
+
+function toggleTabname() {
+
+    if (tabname == 'weeks') {
+        tabname = 'checks';
+    } else {
+        tabname = 'weeks';
+    }
+    localStorage.setItem("tabname", tabname);
+
+    setFormDate(0);
 }
 
 function showMenu(e, id, link) {
@@ -170,7 +188,7 @@ function showMenu(e, id, link) {
 
 async function histDel(id) {
 
-    let url = '/del/'+id;
+    let url = '/del/'+tabname+'/'+id;
     resp = await (await fetch(url));
 
     document.getElementById('count'+id).innerHTML = 0;

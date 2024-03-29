@@ -12,9 +12,10 @@ func addHandler(c *gin.Context) {
 	var idStr string
 	var resp int
 
+	tab := c.Param("tab")
 	idStr = c.Param("id")
 	ID, err := strconv.Atoi(idStr)
-	allChecks = db.Select(appConfig.DBPath, "checks")
+	allChecks = db.Select(appConfig.DBPath, tab)
 
 	if err == nil {
 		for _, check := range allChecks {
@@ -22,7 +23,7 @@ func addHandler(c *gin.Context) {
 			if ID == check.ID {
 				check.Count = check.Count + 1
 				resp = check.Count
-				db.Update(appConfig.DBPath, "checks", check, check.ID)
+				db.Update(appConfig.DBPath, tab, check, check.ID)
 				break
 			}
 		}
@@ -33,11 +34,12 @@ func addHandler(c *gin.Context) {
 
 func delHandler(c *gin.Context) {
 
+	tab := c.Param("tab")
 	IDstr := c.Param("id")
 	ID, err := strconv.Atoi(IDstr)
 
 	if err == nil {
-		db.Delete(appConfig.DBPath, "checks", ID)
+		db.Delete(appConfig.DBPath, tab, ID)
 	}
 
 	c.IndentedJSON(http.StatusOK, "")

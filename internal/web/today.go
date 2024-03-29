@@ -18,7 +18,7 @@ func setTodayChecks() {
 	date := setToday()
 	lastToday = date
 	setChecksForDate(date)
-	setWeeklyForDate(date)
+	setWeeklyForDate(date) // weeks.go
 }
 
 func setChecksForDate(date string) (todayChecks []models.Check) {
