@@ -24,18 +24,16 @@
                 <tr>
                     <td>Color</td>
                     <td>
-                        <input name="color" value="{{ .OnePlan.Color }}" type="color" class="form-control form-control-color">
-                    </td>
-                </tr>
-                <tr>
-                    <td>No Color</td>
-                    <td>
-                        <div class="form-check form-switch">
-                        {{ if .OnePlan.NoColor }}
-                            <input name="nocolor" value="yes" class="form-check-input" type="checkbox" checked>
-                        {{ else }}
-                            <input name="nocolor" value="yes" class="form-check-input" type="checkbox">
-                        {{ end }}
+                        <div class="gap-3 hstack">
+                            <input name="color" value="{{ .OnePlan.Color }}" type="color" class="form-control form-control-color">
+                            
+                            <div class="form-check form-switch" title="No Color">
+                            {{ if .OnePlan.NoColor }}
+                                <input name="nocolor" value="yes" class="form-check-input" type="checkbox" checked>
+                            {{ else }}
+                                <input name="nocolor" value="yes" class="form-check-input" type="checkbox">
+                            {{ end }}
+                            </div>
                         </div>
                     </td>
                 </tr>

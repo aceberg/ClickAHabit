@@ -29,13 +29,9 @@ func setChecksForDate(date string) (todayChecks []models.Check) {
 
 	for _, plan := range allPlans {
 		if !inSlice(plan, todayChecks) && !plan.Pause && !plan.Weekly {
+			check = copyPlan(plan)
 			check.Date = date
-			check.Group = plan.Group
-			check.Name = plan.Name
-			check.Color = plan.Color
-			check.Icon = plan.Icon
-			check.Place = plan.Place
-			check.Link = plan.Link
+
 			todayChecks = append(todayChecks, check)
 			db.Insert(appConfig.DBPath, "checks", check)
 			changedDB = true
@@ -71,4 +67,16 @@ func inSlice(plan models.Plan, todayChecks []models.Check) bool {
 	}
 
 	return false
+}
+
+func copyPlan(plan models.Plan) (check models.Check) {
+
+	check.Group = plan.Group
+	check.Name = plan.Name
+	check.Color = plan.Color
+	check.Icon = plan.Icon
+	check.Place = plan.Place
+	check.Link = plan.Link
+
+	return check
 }

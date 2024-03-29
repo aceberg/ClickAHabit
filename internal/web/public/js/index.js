@@ -147,7 +147,7 @@ function toggleLayout() {
     }
     localStorage.setItem("layout", layout);
 
-    setFormDate(0);
+    setToday();
 }
 
 function toggleTabname() {
