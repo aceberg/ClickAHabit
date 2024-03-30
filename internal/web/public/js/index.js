@@ -6,7 +6,7 @@ function setToday() {
     layout = localStorage.getItem("layout");
 
     tabname = localStorage.getItem("tabname");
-    if (tabname == '') {
+    if (tabname != 'weeks') {
         tabname = "checks"
     }
     
@@ -78,12 +78,12 @@ function genHTML(gr, checks) {
         }
         html = html + hcol + `
             </p>
-                <div id="menu${checks[i].ID}" class="btn-group btn-group-lg" onclick="addOne(${checks[i].ID});" oncontextmenu="showMenu(event,${checks[i].ID}, '${checks[i].Link}');">
-                    <button id="btn${checks[i].ID}" class="my-btn-lg ${btn} style="border-left-width: thick; border-left-color: ${checks[i].Color};">
+                <div class="btn-group btn-group-lg" oncontextmenu="showMenu(event,${checks[i].ID}, '${checks[i].Link}');">
+                    <button id="btn${checks[i].ID}" onclick="addOne(${checks[i].ID});" class="my-btn-lg ${btn} style="border-left-width: thick; border-left-color: ${checks[i].Color};">
                         ${icon}
                         ${checks[i].Name}
                     </button>
-                    <button id="count${checks[i].ID}" class="${btn}>
+                    <button id="count${checks[i].ID}" onclick="showMenu(event,${checks[i].ID}, '${checks[i].Link}');" class="${btn}>
                         ${checks[i].Count}
                     </button>
                 </div>
@@ -170,12 +170,15 @@ function showMenu(e, id, link) {
     e.preventDefault()
     let menu = document.createElement("div");
     menu.id = "ctxmenu"
-    menu.className ="btn-group-vertical"
-    menu.style.display = "block";
-    // menu.style.position= "fixed";
-    menu.style.top = e.pageY + 20 + 'px';
+    menu.className ="btn-group-vertical";
+    menu.style.position= "fixed";
+    menu.style.top = e.pageY + 'px';
     menu.style.left = e.pageX + 'px';
-    menu.onmouseleave = () => ctxmenu.outerHTML = ''
+    menu.onmouseleave = () => ctxmenu.outerHTML = '';
+    menu.onpointerleave = () => ctxmenu.outerHTML = '';
+
+    document.getElementById('indexBody').ontouchmove = () => ctxmenu.outerHTML = '';
+    
     if (link !== '') {
         linkBtn = `<button class="btn" onclick="window.open('${link}', '_blank');">Open Link in a New Tab</button>`;
     }

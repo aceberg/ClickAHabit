@@ -9,12 +9,14 @@
 }
 
 #ctxmenu {
-    position: fixed;
-    background-color: var(--bs-body-bg);
-    max-width: 17em;
+    position: sticky;
+    background-color: #00000000;
 }
+
 #ctxmenu > button {
-    /* padding: 0 1rem; */
+    max-width: 17em;
+    text-align: left;
+    text-indent: 1em;
     background-color: var(--bs-body-bg);
     border: 1px solid var(--bs-primary);
 } 
