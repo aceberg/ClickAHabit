@@ -56,7 +56,7 @@ func Gui(dirPath, nodePath string) {
 	router.GET("/plan/", planHandler)            // plan.go
 	router.GET("/planedit/:id", editHandler)     // plan-edit.go
 	router.GET("/plandel/:id", planDel)          // plan.go
-	router.GET("/stats/:id", statsHandler)       // stats.go
+	router.GET("/stats/:tab/:id", statsHandler)  // stats.go
 	router.GET("/smore/:key", statsMore)         // stats-more.go
 	router.GET("/update/:tab/:date", updatePlan) // update.go
 

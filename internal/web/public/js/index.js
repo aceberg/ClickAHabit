@@ -183,7 +183,7 @@ function showMenu(e, id, link) {
         linkBtn = `<button class="btn" onclick="window.open('${link}', '_blank');">Open Link in a New Tab</button>`;
     }
     menu.innerHTML = linkBtn +`
-        <button class="btn" onclick="window.open('/stats/${id}', '_self');">Statistics</button>
+        <button class="btn" onclick="window.open('/stats/${tabname}/${id}', '_self');">Statistics</button>
         <button class="btn" onclick="histDel(${id});">Reset Todays Counter</button>`
     
     document.getElementById('checkList').appendChild(menu);
@@ -194,9 +194,5 @@ async function histDel(id) {
     let url = '/del/'+tabname+'/'+id;
     resp = await (await fetch(url));
 
-    document.getElementById('count'+id).innerHTML = 0;
-    document.getElementById('btn'+id).classList.remove('btn-primary');
-    document.getElementById('count'+id).classList.remove('btn-primary');
-    document.getElementById('btn'+id).classList.add('btn-outline-primary');
-    document.getElementById('count'+id).classList.add('btn-outline-primary');
+    setFormDate(0);
 }

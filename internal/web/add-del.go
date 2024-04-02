@@ -42,5 +42,5 @@ func delHandler(c *gin.Context) {
 		db.Delete(appConfig.DBPath, tab, ID)
 	}
 
-	c.IndentedJSON(http.StatusOK, "")
+	c.IndentedJSON(http.StatusOK, "ok")
 }
